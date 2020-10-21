@@ -22,7 +22,7 @@ jobs:
         java-version: 13
     - name: Build with Maven
       run: xvfb-run mvn -B package --file pom.xml
-    - name: Upload Artifact
+
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
       with:
