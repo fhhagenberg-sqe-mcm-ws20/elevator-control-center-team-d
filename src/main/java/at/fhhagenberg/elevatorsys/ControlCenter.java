@@ -24,7 +24,7 @@ public class ControlCenter {
         List<ElevatorModel> elevatorModels = new ArrayList<>();
         List<FloorModel> floorModels = new ArrayList<>();
 
-        for (int i = 0; i <= elevatorNum; i++) {
+        for (int i = 0; i < elevatorNum; i++) {
             ElevatorModel.ElevatorModelBuilder builder = new ElevatorModel.ElevatorModelBuilder();
             builder.setDirectionStatus(elevatorApi.getCommittedDirection(i));
             builder.setDoorStatus(elevatorApi.getElevatorDoorStatus(i));
@@ -45,15 +45,20 @@ public class ControlCenter {
         }
 
         //Add floors to list
-        for (int i = 0; i <= floorNum; i++) {
+        for (int i = 0; i < floorNum; i++) {
             boolean buttonUpState = elevatorApi.getFloorButtonUp(i);
             boolean buttonDownState = elevatorApi.getFloorButtonDown(i);
             int floorHeight = elevatorApi.getFloorHeight();
             floorModels.add(new FloorModel(buttonDownState, buttonUpState, i, floorHeight));
         }
-
         return new BuildingModel(elevatorModels, floorModels);
-
     }
 
+    public BuildingModel getBuildingModel() {
+        return buildingModel;
+    }
+
+    public IElevator getElevatorApi() {
+        return elevatorApi;
+    }
 }

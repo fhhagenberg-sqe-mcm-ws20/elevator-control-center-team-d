@@ -14,13 +14,18 @@ public class BuildingModel {
     }
 
    public ElevatorModel getElevator(int elevatorNumber) {
-        return elevators.get(elevatorNumber-1);
+        return elevators.get(elevatorNumber);
    }
 
     public FloorModel getFloorModel(int floorNumber) {
-        return floors.get(floorNumber-1);
+        return floors.get(floorNumber);
     }
 
+    public List<ElevatorModel> getElevators() {
+        return elevators;
+    }
 
-
+    public List<FloorModel> getFloors() {
+        return floors;
+    }
 }
