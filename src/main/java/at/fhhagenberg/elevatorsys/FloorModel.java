@@ -2,20 +2,24 @@ package at.fhhagenberg.elevatorsys;
 
 public class FloorModel {
 
-    public static final int FLOOR_HEIGHT = 350;
-
     private boolean buttonDown;
     private boolean buttonUp;
     private int floorNr;
+    private int floorHeight;
 
-    public FloorModel(boolean buttonDown, boolean buttonUp, int floorNr) {
+    public FloorModel(boolean buttonDown, boolean buttonUp, int floorNr, int floorHeight) {
         this.buttonDown = buttonDown;
         this.buttonUp = buttonUp;
         this.floorNr = floorNr;
+        this.floorHeight = floorHeight;
     }
 
-    public static int getFloorHeight() {
-        return FLOOR_HEIGHT;
+    public int getFloorHeight() {
+        return floorHeight;
+    }
+
+    public void setFloorHeight(int floorHeight) {
+        this.floorHeight = floorHeight;
     }
 
     public boolean isButtonDown() {

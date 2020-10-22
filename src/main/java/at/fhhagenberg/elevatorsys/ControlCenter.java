@@ -11,9 +11,14 @@ public class ControlCenter {
 
     public ControlCenter(IElevator elevatorApi) {
         this.elevatorApi = elevatorApi;
+        try {
+            buildingModel = initialiseBuildingModel();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initialiseBuildingModel() throws RemoteException {
+    private BuildingModel initialiseBuildingModel() throws RemoteException {
         final int elevatorNum = this.elevatorApi.getElevatorNum();
         final int floorNum = this.elevatorApi.getFloorNum();
         List<ElevatorModel> elevatorModels = new ArrayList<>();
@@ -36,10 +41,18 @@ public class ControlCenter {
                     builder.addServicedFloor(j);
                 }
             }
+            elevatorModels.add(builder.build());
         }
 
         //Add floors to list
+        for (int i = 0; i <= floorNum; i++) {
+            boolean buttonUpState = elevatorApi.getFloorButtonUp(i);
+            boolean buttonDownState = elevatorApi.getFloorButtonDown(i);
+            int floorHeight = elevatorApi.getFloorHeight();
+            floorModels.add(new FloorModel(buttonDownState, buttonUpState, i, floorHeight));
+        }
 
+        return new BuildingModel(elevatorModels, floorModels);
 
     }
 
