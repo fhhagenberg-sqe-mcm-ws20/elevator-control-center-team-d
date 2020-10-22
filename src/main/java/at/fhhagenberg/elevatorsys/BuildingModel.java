@@ -17,7 +17,7 @@ public class BuildingModel {
         return elevators.get(elevatorNumber);
    }
 
-    public FloorModel getFloorModel(int floorNumber) {
+    public FloorModel getFloor(int floorNumber) {
         return floors.get(floorNumber);
     }
 
