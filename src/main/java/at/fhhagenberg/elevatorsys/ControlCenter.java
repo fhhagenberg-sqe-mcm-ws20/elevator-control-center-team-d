@@ -18,7 +18,7 @@ public class ControlCenter {
         }
     }
 
-    private boolean updateBuilding() throws RemoteException {
+    public boolean updateBuilding() throws RemoteException {
         long tickStart = this.elevatorApi.getClockTick();
         BuildingModel buildingModelNew = queryBuilding();
 
@@ -26,10 +26,7 @@ public class ControlCenter {
             return false;
         }
 
-        //TODO: deal with return value
-        buildingModel.update(buildingModelNew);
-
-        return true;
+        return buildingModel.update(buildingModelNew);
     }
 
     private BuildingModel queryBuilding() throws RemoteException {

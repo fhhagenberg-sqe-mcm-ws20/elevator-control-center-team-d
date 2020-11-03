@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.rmi.RemoteException;
 
@@ -32,6 +34,7 @@ class ControlCenterTest {
         Mockito.when(elevator.getElevatorWeight(anyInt())).thenReturn(0);
         Mockito.when(elevator.getTarget(anyInt())).thenReturn(0);
         Mockito.when(elevator.getServicesFloors(anyInt(), anyInt())).thenReturn(true);
+        Mockito.when(elevator.getClockTick()).thenReturn((long)10);
 
         Mockito.when(elevator.getFloorHeight()).thenReturn(10);
         Mockito.when(elevator.getFloorButtonUp(anyInt())).thenReturn(false);
@@ -91,6 +94,37 @@ class ControlCenterTest {
         assertEquals(20, controlCenter.getBuildingModel().getFloor(1).getFloorHeight());
         assertEquals(true, controlCenter.getBuildingModel().getFloor(1).isButtonDown());
         assertEquals(true, controlCenter.getBuildingModel().getFloor(1).isButtonUp());
+    }
+
+    @Test
+    void t_updateTickCorrect() throws RemoteException {
+        //WHEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
+        Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
+
+        //THEN
+        assertEquals(2, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(true, controlCenter.updateBuilding());
+        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+    }
+
+    @Test
+    void t_updateTickChanged() throws RemoteException {
+        //WHEN
+        Mockito.when(elevator.getClockTick()).thenAnswer(new Answer() {
+            private long ticks = 10;
+
+            public Object answer(InvocationOnMock invocation) {
+                return ticks++;
+            }
+        });
+        ControlCenter controlCenter = new ControlCenter(elevator);
+        Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
+
+        //THEN
+        assertEquals(2, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(false, controlCenter.updateBuilding());
+        assertEquals(2, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
     }
 
 
