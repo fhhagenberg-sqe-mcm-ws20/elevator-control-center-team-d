@@ -19,6 +19,8 @@ public class ControlCenter {
         }
     }
 
+
+   //In Addition heck if the clock tick is the same as from the earlier polling so we can skip the data if its the same since data didnt change.
     public boolean updateBuilding() throws RemoteException {
         long tickStart = this.elevatorApi.getClockTick();
         BuildingModel buildingModelNew = queryBuilding();
