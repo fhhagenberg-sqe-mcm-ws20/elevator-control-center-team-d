@@ -34,7 +34,7 @@ class ControlCenterTest {
         Mockito.when(elevator.getElevatorWeight(anyInt())).thenReturn(0);
         Mockito.when(elevator.getTarget(anyInt())).thenReturn(0);
         Mockito.when(elevator.getServicesFloors(anyInt(), anyInt())).thenReturn(true);
-        Mockito.when(elevator.getClockTick()).thenReturn((long)10);
+        Mockito.when(elevator.getClockTick()).thenReturn(10L);
 
         Mockito.when(elevator.getFloorHeight()).thenReturn(10);
         Mockito.when(elevator.getFloorButtonUp(anyInt())).thenReturn(false);
@@ -112,7 +112,7 @@ class ControlCenterTest {
     void t_updateTickChanged() throws RemoteException {
         //WHEN
         Mockito.when(elevator.getClockTick()).thenAnswer(new Answer() {
-            private long ticks = 10;
+            private long ticks = 10L;
 
             public Object answer(InvocationOnMock invocation) {
                 return ticks++;
