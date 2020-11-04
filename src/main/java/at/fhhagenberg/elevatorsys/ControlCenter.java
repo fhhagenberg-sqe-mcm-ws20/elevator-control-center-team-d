@@ -12,6 +12,7 @@ public class ControlCenter {
     public ControlCenter(IElevator elevatorApi) {
         this.elevatorApi = elevatorApi;
         try {
+            //TODO: change to updateBuilding? but what if it fails because of a changed tick? stays uninitialized
             buildingModel = queryBuilding();
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -25,8 +26,9 @@ public class ControlCenter {
         if(tickStart != this.elevatorApi.getClockTick()){
             return false;
         }
+        buildingModel.update(buildingModelNew);
 
-        return buildingModel.update(buildingModelNew);
+        return true;
     }
 
     private BuildingModel queryBuilding() throws RemoteException {
