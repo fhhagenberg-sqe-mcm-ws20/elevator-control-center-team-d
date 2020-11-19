@@ -69,25 +69,6 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.2.0</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.6</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -99,6 +80,26 @@
                     <launcher>launcher</launcher>
                     <mainClass>at.fhhagenberg.sqe.App</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <executions>
+                    <execution>
+                        <id>jacoco-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
