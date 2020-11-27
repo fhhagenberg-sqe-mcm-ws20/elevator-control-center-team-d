@@ -1,4 +1,4 @@
-package at.fhhagenberg.elevatorsys;
+package at.fhhagenberg.elevatorsys.models;
 
 public class FloorModel {
 

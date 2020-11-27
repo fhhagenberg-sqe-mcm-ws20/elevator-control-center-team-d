@@ -1,4 +1,4 @@
-package at.fhhagenberg.elevatorsys;
+package at.fhhagenberg.elevatorsys.models;
 
 import java.util.List;
 
