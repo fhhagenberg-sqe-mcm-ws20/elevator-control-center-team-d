@@ -1,4 +1,4 @@
-package at.fhhagenberg.elevatorsys;
+package at.fhhagenberg.sqe;
 //package sqelevator;
 
 /**

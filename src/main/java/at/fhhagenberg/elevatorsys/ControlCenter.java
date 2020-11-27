@@ -1,5 +1,7 @@
 package at.fhhagenberg.elevatorsys;
 
+import at.fhhagenberg.sqe.IElevator;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
