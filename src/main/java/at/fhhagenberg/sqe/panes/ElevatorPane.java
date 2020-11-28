@@ -3,15 +3,16 @@ package at.fhhagenberg.sqe.panes;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 
-public class ElevatorPane extends FlowPane {
+public class ElevatorPane extends VBox {
 
     private final ElevatorFloorPane elevatorFloorPane;
     private final int maxHeight;
 
     public ElevatorPane(int numberOfFloors) {
         assert numberOfFloors > 0;
-        this.setOrientation(Orientation.VERTICAL);
+        //this.setOrientation(Orientation.VERTICAL);
         elevatorFloorPane = new ElevatorFloorPane(numberOfFloors);
         Button manualButton = new Button("  MANUAL  ");
         Button autoButton = new Button("AUTOMATIC");

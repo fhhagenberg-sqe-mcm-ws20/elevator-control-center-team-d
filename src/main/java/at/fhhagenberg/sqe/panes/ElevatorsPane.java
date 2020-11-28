@@ -2,8 +2,10 @@ package at.fhhagenberg.sqe.panes;
 
 import javafx.geometry.Orientation;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class ElevatorsPane extends FlowPane {
+public class ElevatorsPane extends HBox {
 
     ElevatorPane[] elevators;
     private final int numberOfElevators;
@@ -12,7 +14,7 @@ public class ElevatorsPane extends FlowPane {
     public ElevatorsPane(int numberOfElevators, int numberOfFloors) {
         this.numberOfElevators = numberOfElevators;
         this.numberOfFloors = numberOfFloors;
-        this.setOrientation(Orientation.VERTICAL);
+        //this.setOrientation(Orientation.VERTICAL);
         elevators = new ElevatorPane[numberOfElevators];
 
         for (int i = 0; i < numberOfElevators; i++) {
