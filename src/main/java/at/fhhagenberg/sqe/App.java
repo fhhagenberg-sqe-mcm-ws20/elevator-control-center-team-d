@@ -1,6 +1,8 @@
 package at.fhhagenberg.sqe;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
+import at.fhhagenberg.sqe.panes.ElevatorFloorPane;
+import at.fhhagenberg.sqe.panes.ElevatorsPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
