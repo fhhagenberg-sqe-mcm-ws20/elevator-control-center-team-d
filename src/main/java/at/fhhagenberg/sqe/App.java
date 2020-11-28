@@ -12,30 +12,30 @@ import javafx.stage.Stage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+
 /**
  * JavaFX App
  */
 public class App extends Application implements PropertyChangeListener {
 
+    private ElevatorFloorPane elevator;
+    private int ran = 0;
+    private ElevatorsPane elevatorPane;
+
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var layout = new BorderPane(label);
-        var button = new Button("Click me!");
-        button.setOnAction(evt -> button.setText("Clicked!"));
-        layout.setBottom(button);
 
         //TODO: create controlCenter and get Data to define screen Size
         //ControlCenter controlCenter = new ControlCenter(new IElevator()); // Need an Elevator Class for that
 
+        var layout = new BorderPane();
+        elevatorPane = new ElevatorsPane(3,7);
+        layout.setLeft(elevatorPane);
 
-        var scene = new Scene(layout, 640, 480);
-
+        var scene = new Scene(layout, 1000, 700);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
