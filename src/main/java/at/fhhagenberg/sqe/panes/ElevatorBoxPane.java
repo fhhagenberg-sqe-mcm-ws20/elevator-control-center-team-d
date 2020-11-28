@@ -9,14 +9,14 @@ import javafx.scene.shape.Rectangle;
 public class ElevatorBoxPane extends BorderPane {
     Rectangle doorLeft;
     Rectangle doorRight;
-    //Polyline arrowLine;
     Polyline arrowUp;
     Polyline arrowDown;
 
     //TODO: get rid of magic numbers
     public ElevatorBoxPane() {
-        this.setPrefHeight(35);
-        this.setPrefWidth(35);
+        this.setPrefHeight(48);
+        this.setPrefWidth(48);
+        this.setStyle("-fx-background-color: #D3D3D3;");
         //this.setMaxSize(35,35);
         //this.setMinSize(35,35);
         //this.setHeight(35);

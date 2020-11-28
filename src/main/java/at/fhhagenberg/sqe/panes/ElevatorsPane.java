@@ -31,8 +31,12 @@ public class ElevatorsPane extends HBox {
         elevators[elevator].unsetFloor(floor);
     }
 
-    public void setFloorLightForElevator(int elevator, int floor) {
-        elevators[elevator].setLight(floor);
+    public void setFloorLightSelectedForElevator(int elevator, int floor) {
+        elevators[elevator].setLightSelected(floor);
+    }
+
+    public void setFloorLightTargetForElevator(int elevator, int floor) {
+        elevators[elevator].setLightTarget(floor);
     }
 
     public void unsetFloorLightForElevator(int elevator, int floor) {

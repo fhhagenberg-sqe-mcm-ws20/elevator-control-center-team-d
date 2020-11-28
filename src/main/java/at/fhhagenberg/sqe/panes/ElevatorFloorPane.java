@@ -4,28 +4,29 @@ import javafx.geometry.Orientation;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class ElevatorFloorPane extends VBox {
 
     FloorPane[] floors;
     private final int numberOfFloors;
+    private final ElevatorBoxPane elevator;
 
     public ElevatorFloorPane(int numberOfFloors) {
         this.numberOfFloors = numberOfFloors-1;
-        //this.setOrientation(Orientation.VERTICAL);
+        this.elevator = new ElevatorBoxPane();
         floors = new FloorPane[numberOfFloors];
 
         for (int i = 0; i < numberOfFloors; i++) {
             floors[i] = new FloorPane();
-            //floors[i].setPrefWrapLength(110);
         }
-        floors[numberOfFloors-1].setFloor();
+        floors[numberOfFloors-1].setFloor(elevator);
         this.getChildren().addAll(floors);
     }
 
     public void setFloor(int level) {
         assert level <= numberOfFloors;
-        floors[numberOfFloors-level].setFloor();
+        floors[numberOfFloors-level].setFloor(elevator);
     }
 
     public void unsetFloor(int level) {
@@ -33,9 +34,9 @@ public class ElevatorFloorPane extends VBox {
         floors[numberOfFloors-level].unsetFloor();
     }
 
-    public void setFloorLight(int level) {
+    public void setFloorLight(int level, Color color) {
         assert level <= numberOfFloors;
-        floors[numberOfFloors-level].setLight();
+        floors[numberOfFloors-level].setLight(color);
     }
 
     public void unsetFloorLight(int level) {
@@ -53,4 +54,9 @@ public class ElevatorFloorPane extends VBox {
         return numberOfFloors;
     }
 
+    public void unsetAllFloors() {
+        for(FloorPane floor : floors){
+            floor.unsetFloor();
+        }
+    }
 }
