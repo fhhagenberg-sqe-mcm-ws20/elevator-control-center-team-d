@@ -1,5 +1,6 @@
 package at.fhhagenberg.sqe.panes;
 
+import at.fhhagenberg.elevatorsys.models.FloorModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -40,7 +41,12 @@ public class FloorIndicatorPane extends HBox {
         this.setAlignment(Pos.CENTER_LEFT);
     }
 
-    public void setUpActivated(boolean activated){
+    public void update(FloorModel floorModel) {
+        setUpActivated(floorModel.isButtonUp());
+        setDownActivated(floorModel.isButtonDown());
+    }
+
+    private void setUpActivated(boolean activated){
         if(activated) {
             indicatorUp.setFill(Color.LIGHTGREEN);
         }
@@ -49,7 +55,7 @@ public class FloorIndicatorPane extends HBox {
         }
     }
 
-    public void setDownActivated(boolean activated) {
+    private void setDownActivated(boolean activated) {
         if (activated) {
             indicatorDown.setFill(Color.LIGHTGREEN);
         } else {

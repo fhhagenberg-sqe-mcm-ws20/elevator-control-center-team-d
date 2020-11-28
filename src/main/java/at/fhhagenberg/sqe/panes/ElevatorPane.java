@@ -31,7 +31,7 @@ public class ElevatorPane extends VBox {
         speedLabel.setText("speed: " + elevatorModel.getCurrentSpeed());
         unsetAllFloors();
         setFloor(elevatorModel.getCurrentFloor());
-
+        //TODO: set door Status and committed direction in Elevator box pane
         unsetAllLights();
         for(Integer floorNumber : elevatorModel.getSelectedFloors()){
             setLightSelected(floorNumber);
