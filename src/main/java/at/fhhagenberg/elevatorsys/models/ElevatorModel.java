@@ -14,6 +14,7 @@ public class ElevatorModel {
     private int currentSpeed;
     private int currentWeight;
     private int currentFloorTarget;
+    private boolean automaticControlActivated = true;
     private List<Integer> servicedFloors;
     private List<Integer> selectedFloors;
 
@@ -133,6 +134,14 @@ public class ElevatorModel {
 
     public void unselectFloor(Integer floor) {
         selectedFloors.remove(floor);
+    }
+
+    public boolean isAutomaticControlActivated() {
+        return automaticControlActivated;
+    }
+
+    public void setAutomaticControl(boolean automaticControlActivated) {
+        this.automaticControlActivated = automaticControlActivated;
     }
 
     public void shouldServeFloor(int floor, boolean serve) {
