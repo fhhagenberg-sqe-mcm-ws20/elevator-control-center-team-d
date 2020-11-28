@@ -1,22 +1,22 @@
 package at.fhhagenberg.sqe;
 
-import at.fhhagenberg.sqe.panes.ElevatorFloorPane;
-import at.fhhagenberg.sqe.panes.ElevatorPane;
-import at.fhhagenberg.sqe.panes.ElevatorsPane;
-import at.fhhagenberg.sqe.panes.FloorPane;
+import at.fhhagenberg.elevatorsys.ControlCenter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import static java.lang.Thread.sleep;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class App extends Application implements PropertyChangeListener {
 
     private ElevatorFloorPane elevator;
     private int ran = 0;
@@ -24,6 +24,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        //TODO: create controlCenter and get Data to define screen Size
+        //ControlCenter controlCenter = new ControlCenter(new IElevator()); // Need an Elevator Class for that
 
         var layout = new BorderPane();
         elevatorPane = new ElevatorsPane(3,7);
@@ -39,4 +42,8 @@ public class App extends Application {
         launch();
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+    }
 }
