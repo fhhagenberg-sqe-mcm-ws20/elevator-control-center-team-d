@@ -1,5 +1,8 @@
 package at.fhhagenberg.elevatorsys;
 
+import at.fhhagenberg.elevatorsys.models.CommittedDirection;
+import at.fhhagenberg.elevatorsys.models.DoorStatus;
+import at.fhhagenberg.elevatorsys.models.FloorModel;
 import at.fhhagenberg.sqe.IElevator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,7 @@ import org.mockito.stubbing.Answer;
 import java.rmi.RemoteException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 
@@ -49,6 +53,7 @@ class ControlCenterTest {
         //THEN
         assertEquals(2, controlCenter.getBuildingModel().getElevators().size());
         assertEquals(10, controlCenter.getBuildingModel().getFloors().size());
+        assertEquals(elevator, controlCenter.getElevatorApi());
     }
 
     @Test
@@ -69,31 +74,54 @@ class ControlCenterTest {
         ControlCenter controlCenter = new ControlCenter(elevator);
 
         //THEN
-        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(CommittedDirection.DOWN, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentAcceleration());
-        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getDoorStatus());
-        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentFloor());
+        assertEquals(DoorStatus.CLOSED, controlCenter.getDoorStatus(1));
+        assertEquals(1, controlCenter.getElevatorPosition(1));
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentPosition());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentSpeed());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentWeight());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCapacity());
-        assertEquals(false, controlCenter.getBuildingModel().getElevator(1).getServicedFloors().contains(1));
-        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentFloorTarget());
-        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(false, controlCenter.getServicedFloors(1).contains(1));
+        assertEquals(1, controlCenter.getTarget(1));
+        assertEquals(CommittedDirection.DOWN, controlCenter.getCommittedDirection(1));
+    }
+
+    @Test
+    void t_elevatorDataModelSetIllegalValuesThrows(){
+        //WHEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
+
+        assertThrows(IllegalArgumentException.class, () -> controlCenter.getBuildingModel().getElevator(1).setCapacity(-10));
+        assertThrows(IllegalArgumentException.class, () -> controlCenter.getBuildingModel().getElevator(1).setCurrentWeight(-10));
     }
 
     @Test
     void t_floorDataModel() throws RemoteException {
         //WHEN
         Mockito.when(elevator.getFloorHeight()).thenReturn(20);
-        Mockito.when(elevator.getFloorButtonDown(1)).thenReturn(true);
-        Mockito.when(elevator.getFloorButtonUp(1)).thenReturn(true);
+        Mockito.when(elevator.getFloorButtonDown(1)).thenReturn(false);
+        Mockito.when(elevator.getFloorButtonUp(1)).thenReturn(false);
         ControlCenter controlCenter = new ControlCenter(elevator);
+        FloorModel floor = controlCenter.getBuildingModel().getFloor(1);
+        floor.setButtonUp(true);
+        floor.setButtonDown(true);
 
         //THEN
         assertEquals(20, controlCenter.getBuildingModel().getFloor(1).getFloorHeight());
-        assertEquals(true, controlCenter.getBuildingModel().getFloor(1).isButtonDown());
-        assertEquals(true, controlCenter.getBuildingModel().getFloor(1).isButtonUp());
+        assertEquals(true, controlCenter.getFloorButtonUp(1));
+        assertEquals(true, controlCenter.getFloorButtonDown(1));
+        assertEquals(1, controlCenter.getBuildingModel().getFloor(1).getFloorNr());
+    }
+
+    @Test
+    void t_buildingDataModel(){
+        //WHEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
+
+        //THEN
+        assertEquals(2, controlCenter.getNumberOfElevators());
+        assertEquals(10, controlCenter.getNumberOfFloors());
     }
 
     @Test
@@ -103,9 +131,9 @@ class ControlCenterTest {
         Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
 
         //THEN
-        assertEquals(2, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(CommittedDirection.UNCOMMITTED, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
         assertEquals(true, controlCenter.updateBuilding());
-        assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(CommittedDirection.DOWN, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
     }
 
     @Test
@@ -122,9 +150,9 @@ class ControlCenterTest {
         Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
 
         //THEN
-        assertEquals(2, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(CommittedDirection.UNCOMMITTED, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
         assertEquals(false, controlCenter.updateBuilding());
-        assertEquals(2, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
+        assertEquals(CommittedDirection.UNCOMMITTED, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
     }
 
 
