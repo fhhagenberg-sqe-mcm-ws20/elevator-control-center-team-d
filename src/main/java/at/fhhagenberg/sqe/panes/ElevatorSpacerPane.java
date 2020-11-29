@@ -11,7 +11,7 @@ public class ElevatorSpacerPane extends VBox {
 
     public ElevatorSpacerPane(int floorNumbers, double width) {
         this.setPrefWidth(width);
-        this.setPrefHeight(floorNumbers*50);
+        this.setPrefHeight((double)floorNumbers*50);
         this.getChildren().add(new Separator());
         for(int i = 0; i < floorNumbers; i++){
             VBox placeholder = new VBox();

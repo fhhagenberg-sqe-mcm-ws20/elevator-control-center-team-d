@@ -18,7 +18,7 @@ public class FloorIndicatorBarPane extends VBox implements PropertyChangeListene
     //TODO: are floors just identified by index
     List<FloorIndicatorPane> floorIndicators = new ArrayList<FloorIndicatorPane>();
     public FloorIndicatorBarPane(int floorCount) {
-        this.setHeight(floorCount*50);
+        this.setHeight(((double)floorCount*50);
 
         for(int i = 0; i < floorCount; i++){
             FloorIndicatorPane indicator = new FloorIndicatorPane(floorCount - i);
