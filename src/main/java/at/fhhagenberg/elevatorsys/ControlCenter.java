@@ -72,8 +72,9 @@ public class ControlCenter {
 
         ElevatorModel.ElevatorModelBuilder builder = new ElevatorModel.ElevatorModelBuilder();
 
-        builder.setDirectionStatus(elevatorApi.getCommittedDirection(elevatorNumber));
-        builder.setDoorStatus(elevatorApi.getElevatorDoorStatus(elevatorNumber));
+        //TODO: convert int to emun here or inside?
+        builder.setDirectionStatus(CommittedDirection.values()[elevatorApi.getCommittedDirection(elevatorNumber)]);
+        builder.setDoorStatus(DoorStatus.values()[elevatorApi.getElevatorDoorStatus(elevatorNumber)]);
         builder.setCurrentAcceleration(elevatorApi.getElevatorAccel(elevatorNumber));
         builder.setCapacity(elevatorApi.getElevatorCapacity(elevatorNumber));
         builder.setCurrentFloor(elevatorApi.getElevatorFloor(elevatorNumber));
@@ -82,7 +83,7 @@ public class ControlCenter {
         builder.setCurrentWeight(elevatorApi.getElevatorWeight(elevatorNumber));
         builder.setCurrentFloorTarget(elevatorApi.getTarget(elevatorNumber));
 
-        for (int j = 0; j <= floorNum; j++) {
+        for (int j = 0; j < floorNum; j++) {
             if (elevatorApi.getServicesFloors(elevatorNumber,j)) {
                 builder.addServicedFloor(j);
             }
@@ -96,7 +97,7 @@ public class ControlCenter {
         boolean buttonDownState = elevatorApi.getFloorButtonDown(floorNumber);
         int floorHeight = elevatorApi.getFloorHeight();
 
-        return new FloorModel(buttonDownState, buttonUpState, floorHeight, floorHeight);
+        return new FloorModel(buttonDownState, buttonUpState, floorNumber, floorHeight);
     }
 
     public BuildingModel getBuildingModel() {
@@ -117,7 +118,7 @@ public class ControlCenter {
         return buildingModel.getElevators().size();
     }
 
-    public boolean automaticControl(int elevatorNumber) {
+    public boolean isAutomaticControlActivated(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated();
     }
 
@@ -132,25 +133,7 @@ public class ControlCenter {
      * @return enum value for the current door status of the chosen elevator
      */
     public DoorStatus getDoorStatus(int elevatorNumber) {
-        int status = buildingModel.getElevator(elevatorNumber).getDoorStatus();
-        DoorStatus doorStatus;
-        switch (status) {
-            case ELEVATOR_DOORS_OPEN:
-                doorStatus = DoorStatus.OPEN;
-                break;
-            case ELEVATOR_DOORS_CLOSED:
-                doorStatus = DoorStatus.CLOSED;
-                break;
-            case ELEVATOR_DOORS_OPENING:
-                doorStatus = DoorStatus.OPENING;
-                break;
-            case ELEVATOR_DOORS_CLOSING:
-                doorStatus = DoorStatus.CLOSING;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected door status: " + status);
-        }
-        return doorStatus;
+        return buildingModel.getElevator(elevatorNumber).getDoorStatus();
     }
 
     /**
@@ -164,22 +147,7 @@ public class ControlCenter {
      * @return enum value of the committed direction of the chosen elevator
      */
     public CommittedDirection getCommittedDirection(int elevatorNumber) {
-        int direction = buildingModel.getElevator(elevatorNumber).getDirectionStatus();
-        CommittedDirection committedDirection;
-        switch (direction) {
-            case ELEVATOR_DIRECTION_UP:
-                committedDirection = CommittedDirection.UP;
-                break;
-            case ELEVATOR_DIRECTION_DOWN:
-                committedDirection = CommittedDirection.DOWN;
-                break;
-            case ELEVATOR_DIRECTION_UNCOMMITTED:
-                committedDirection = CommittedDirection.UNCOMMITTED;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected direction value: " + direction);
-        }
-        return committedDirection;
+        return buildingModel.getElevator(elevatorNumber).getDirectionStatus();
     }
 
     /**
@@ -190,18 +158,17 @@ public class ControlCenter {
     }
 
     /**
-     * @return state of of floor button up/down in certain floor(used enum with up, down, uncommitted).
+     * @return state of of floor button up in certain floor
      */
-    public CommittedDirection getFloorButtonDirection(int floorNumber) {
-        CommittedDirection selectedDirection;
-        if (buildingModel.getFloor(floorNumber).isButtonUp()) {
-            selectedDirection = CommittedDirection.UP;
-        } else if (buildingModel.getFloor(floorNumber).isButtonDown()) {
-            selectedDirection = CommittedDirection.DOWN;
-        } else {
-            selectedDirection = CommittedDirection.UNCOMMITTED;
-        }
-        return selectedDirection;
+    public boolean getFloorButtonUp(int floorNumber) {
+        return buildingModel.getFloor(floorNumber).isButtonUp();
+    }
+
+    /**
+     * @return state of of floor button down in certain floor
+     */
+    public boolean getFloorButtonDown(int floorNumber) {
+        return buildingModel.getFloor(floorNumber).isButtonDown();
     }
 
     /**

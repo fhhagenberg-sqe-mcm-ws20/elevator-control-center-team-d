@@ -1,5 +1,7 @@
 package at.fhhagenberg.sqe.panes;
 
+import at.fhhagenberg.elevatorsys.models.CommittedDirection;
+import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import javafx.geometry.Orientation;
 import javafx.scene.layout.FlowPane;
@@ -61,11 +63,11 @@ public class ElevatorFloorPane extends VBox {
         }
     }
 
-    public void setElevatorDirection(int direction) {
+    public void setElevatorDirection(CommittedDirection direction) {
         elevator.setDirection(direction);
     }
 
-    public void setElevatorDoorStatus(int doorStatus) {
+    public void setElevatorDoorStatus(DoorStatus doorStatus) {
         elevator.setDoorStatus(doorStatus);
     }
 }

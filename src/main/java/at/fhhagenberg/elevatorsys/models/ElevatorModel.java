@@ -1,12 +1,14 @@
 package at.fhhagenberg.elevatorsys.models;
 
+import at.fhhagenberg.sqe.IElevator;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ElevatorModel {
 
-    private int directionStatus;
-    private int doorStatus;
+    private CommittedDirection directionStatus;
+    private DoorStatus doorStatus;
     private int currentAcceleration;
     private int capacity;
     private int currentFloor;
@@ -18,35 +20,35 @@ public class ElevatorModel {
     private List<Integer> servicedFloors;
     private List<Integer> selectedFloors;
 
-    public ElevatorModel(int directionStatus, int doorStatus, int currentAcceleration, int capacity, int currentFloor,
+    public ElevatorModel(CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
                          int currentFloorTarget, List<Integer> servicedFloors) {
-        this.directionStatus = directionStatus;
-        this.doorStatus = doorStatus;
-        this.currentAcceleration = currentAcceleration;
-        this.capacity = capacity;
-        this.currentFloor = currentFloor;
-        this.currentPosition = currentPosition;
-        this.currentSpeed = currentSpeed;
-        this.currentWeight = currentWeight;
-        this.currentFloorTarget = currentFloorTarget;
-        this.servicedFloors = servicedFloors;
-        this.selectedFloors = new ArrayList<>();
+        setDirectionStatus(directionStatus);
+        setDoorStatus(doorStatus);
+        setCurrentAcceleration(currentAcceleration);
+        setCapacity(capacity);
+        setCurrentFloor(currentFloor);
+        setCurrentPosition(currentPosition);
+        setCurrentSpeed(currentSpeed);
+        setCurrentWeight(currentWeight);
+        setCurrentFloorTarget(currentFloorTarget);
+        setServicedFloors(servicedFloors);
+        setSelectedFloors(new ArrayList<>());
     }
 
-    public int getDirectionStatus() {
+    public CommittedDirection getDirectionStatus() {
         return directionStatus;
     }
 
-    public void setDirectionStatus(int directionStatus) {
+    public void setDirectionStatus(CommittedDirection directionStatus) {
         this.directionStatus = directionStatus;
     }
 
-    public int getDoorStatus() {
+    public DoorStatus getDoorStatus() {
         return doorStatus;
     }
 
-    public void setDoorStatus(int doorStatus) {
+    public void setDoorStatus(DoorStatus doorStatus) {
         this.doorStatus = doorStatus;
     }
 
@@ -63,6 +65,9 @@ public class ElevatorModel {
     }
 
     public void setCapacity(int capacity) {
+        if(capacity < 0){
+            throw new IllegalArgumentException("illegal capacity: " + capacity);
+        }
         this.capacity = capacity;
     }
 
@@ -95,6 +100,9 @@ public class ElevatorModel {
     }
 
     public void setCurrentWeight(int currentWeight) {
+        if(currentWeight < 0){
+            throw new IllegalArgumentException("illegal weight: " + currentWeight);
+        }
         this.currentWeight = currentWeight;
     }
 
@@ -154,8 +162,8 @@ public class ElevatorModel {
 
     public static class ElevatorModelBuilder{
 
-        private int directionStatus;
-        private int doorStatus;
+        private CommittedDirection directionStatus;
+        private DoorStatus doorStatus;
         private int currentAcceleration;
         private int capacity;
         private int currentFloor;
@@ -165,11 +173,11 @@ public class ElevatorModel {
         private int currentFloorTarget;
         private List<Integer> servicedFloors = new ArrayList<>();
 
-        public void setDirectionStatus(int directionStatus) {
+        public void setDirectionStatus(CommittedDirection directionStatus) {
             this.directionStatus = directionStatus;
         }
 
-        public void setDoorStatus(int doorStatus) {
+        public void setDoorStatus(DoorStatus doorStatus) {
             this.doorStatus = doorStatus;
         }
 

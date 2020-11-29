@@ -4,8 +4,8 @@ public class FloorModel {
 
     private boolean buttonDown;
     private boolean buttonUp;
-    private int floorNr;
-    private int floorHeight;
+    private final int floorNr;
+    private final int floorHeight;
 
     public FloorModel(boolean buttonDown, boolean buttonUp, int floorNr, int floorHeight) {
         this.buttonDown = buttonDown;
@@ -16,10 +16,6 @@ public class FloorModel {
 
     public int getFloorHeight() {
         return floorHeight;
-    }
-
-    public void setFloorHeight(int floorHeight) {
-        this.floorHeight = floorHeight;
     }
 
     public boolean isButtonDown() {
@@ -40,9 +36,5 @@ public class FloorModel {
 
     public int getFloorNr() {
         return floorNr;
-    }
-
-    public void setFloorNr(int floorNr) {
-        this.floorNr = floorNr;
     }
 }

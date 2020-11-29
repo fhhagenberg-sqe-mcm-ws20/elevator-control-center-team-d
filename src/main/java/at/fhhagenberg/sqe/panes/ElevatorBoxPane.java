@@ -1,6 +1,7 @@
 package at.fhhagenberg.sqe.panes;
 
-import javafx.geometry.Pos;
+import at.fhhagenberg.elevatorsys.models.CommittedDirection;
+import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
@@ -40,26 +41,32 @@ public class ElevatorBoxPane extends BorderPane {
         this.setRight(doorRight);
     }
 
-    public void setDirection(int direction){
-        if(direction > 0){
-            this.setCenter(arrowUp);
-        }
-        else if (direction < 0){
-            this.setCenter(arrowDown);
-        }
-        else {
-            this.setCenter(null);
+    public void setDirection(CommittedDirection direction){
+        switch (direction){
+            case UP:
+                this.setCenter(arrowUp);
+                break;
+            case DOWN:
+                this.setCenter(arrowDown);
+                break;
+            case UNCOMMITTED:
+                this.setCenter(null);
+                break;
         }
     }
 
-    public void setDoorStatus(int doorStatus){
-        if(doorStatus == 1){    //TODO: 1 equals open is just an assumption; adapt when real values are known
-            doorLeft.setFill(Color.GREEN);
-            doorRight.setFill(Color.GREEN);
-        }
-        else {
-            doorLeft.setFill(Color.RED);
-            doorRight.setFill(Color.RED);
+    public void setDoorStatus(DoorStatus doorStatus){
+        switch (doorStatus){
+            case OPEN:
+                doorLeft.setFill(Color.GREEN);
+                doorRight.setFill(Color.GREEN);
+                break;
+            case CLOSED:
+                doorLeft.setFill(Color.RED);
+                doorRight.setFill(Color.RED);
+            default:
+                doorLeft.setFill(Color.ORANGE);
+                doorRight.setFill(Color.ORANGE);
         }
     }
 
