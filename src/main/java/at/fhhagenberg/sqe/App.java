@@ -1,6 +1,7 @@
 package at.fhhagenberg.sqe;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
+import at.fhhagenberg.sqe.panes.ControlCenterUI;
 import at.fhhagenberg.sqe.panes.ElevatorsPane;
 import at.fhhagenberg.sqe.panes.FloorIndicatorBarPane;
 import javafx.application.Application;
@@ -28,19 +29,10 @@ public class App extends Application  {
         int elevatorCount = controlCenter.getNumberOfElevators();
         int floorCount = controlCenter.getNumberOfFloors();
 
-        var layout = new BorderPane();
-        var innerLayout = new HBox();
-        FloorIndicatorBarPane indicators = new FloorIndicatorBarPane(floorCount);
-        elevatorPane = new ElevatorsPane(elevatorCount,floorCount);
-        innerLayout.getChildren().addAll(indicators, elevatorPane);
-        layout.setLeft(innerLayout);
-
-        var scene = new Scene(layout, 1000, 700);
+        ControlCenterUI controlCenterUI = new ControlCenterUI(floorCount, elevatorCount, controlCenter);
+        var scene = new Scene(controlCenterUI, 1000, 700);
         stage.setScene(scene);
         stage.show();
-
-        controlCenter.addPropertyChangeListener(elevatorPane);
-        controlCenter.addPropertyChangeListener(indicators);
     }
 
     public static void main(String[] args) {
