@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FloorIndicatorBarPane extends VBox implements PropertyChangeListener {
-    //TODO: just with floor just identified by index?
+    //TODO: are floors just identified by index
     List<FloorIndicatorPane> floorIndicators = new ArrayList<FloorIndicatorPane>();
     public FloorIndicatorBarPane(int floorCount) {
         this.setHeight(floorCount*50);

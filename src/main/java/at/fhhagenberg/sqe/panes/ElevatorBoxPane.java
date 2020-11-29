@@ -12,7 +12,6 @@ public class ElevatorBoxPane extends BorderPane {
     Polyline arrowUp;
     Polyline arrowDown;
 
-    //TODO: get rid of magic numbers
     public ElevatorBoxPane() {
         this.setPrefHeight(48);
         this.setPrefWidth(48);
@@ -41,17 +40,20 @@ public class ElevatorBoxPane extends BorderPane {
         this.setRight(doorRight);
     }
 
-    public void setDirectionUp(boolean up){
-        if(up){
+    public void setDirection(int direction){
+        if(direction > 0){
             this.setCenter(arrowUp);
         }
-        else {
+        else if (direction < 0){
             this.setCenter(arrowDown);
+        }
+        else {
+            this.setCenter(null);
         }
     }
 
-    public void setDoorOpen(boolean open){
-        if(open){
+    public void setDoorStatus(int doorStatus){
+        if(doorStatus == 1){    //TODO: 1 equals open is just an assumption; adapt when real values are known
             doorLeft.setFill(Color.GREEN);
             doorRight.setFill(Color.GREEN);
         }

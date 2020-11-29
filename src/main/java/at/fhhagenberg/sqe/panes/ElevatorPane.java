@@ -29,14 +29,24 @@ public class ElevatorPane extends VBox {
     public void update(ElevatorModel elevatorModel){
         payloadLabel.setText("payload: " + elevatorModel.getCurrentWeight());
         speedLabel.setText("speed: " + elevatorModel.getCurrentSpeed());
+        elevatorFloorPane.setElevatorDirection(elevatorModel.getDirectionStatus());
+        elevatorFloorPane.setElevatorDoorStatus(elevatorModel.getDoorStatus());
+
         unsetAllFloors();
         setFloor(elevatorModel.getCurrentFloor());
-        //TODO: set door Status and committed direction in Elevator box pane
         unsetAllLights();
         for(Integer floorNumber : elevatorModel.getSelectedFloors()){
             setLightSelected(floorNumber);
         }
         setLightTarget(elevatorModel.getCurrentFloorTarget());
+    }
+
+    public void setElevatorDirection(int direction){
+        elevatorFloorPane.setElevatorDirection(direction);
+    }
+
+    public void setElevatorDoorStatus(int doorStatus){
+        elevatorFloorPane.setElevatorDoorStatus(doorStatus);
     }
 
     public void setLightSelected(int floor) {

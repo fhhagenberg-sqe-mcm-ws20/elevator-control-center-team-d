@@ -36,7 +36,6 @@ public class FloorIndicatorPane extends HBox {
         indicatorLayout.setAlignment(Pos.CENTER);
 
         this.getChildren().addAll(floorNumberLabel, indicatorLayout);
-        //TODO: just for testing; change back to CENTER
         this.setPadding(new Insets(0,5,0,5));
         this.setAlignment(Pos.CENTER_LEFT);
     }
