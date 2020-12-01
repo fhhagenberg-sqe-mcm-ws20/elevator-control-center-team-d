@@ -1,7 +1,5 @@
 package at.fhhagenberg.elevatorsys.models;
 
-import at.fhhagenberg.sqe.IElevator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +21,17 @@ public class ElevatorModel {
     public ElevatorModel(CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
                          int currentFloorTarget, List<Integer> servicedFloors) {
-        setDirectionStatus(directionStatus);
-        setDoorStatus(doorStatus);
-        setCurrentAcceleration(currentAcceleration);
-        setCapacity(capacity);
-        setCurrentFloor(currentFloor);
-        setCurrentPosition(currentPosition);
-        setCurrentSpeed(currentSpeed);
-        setCurrentWeight(currentWeight);
-        setCurrentFloorTarget(currentFloorTarget);
-        setServicedFloors(servicedFloors);
-        setSelectedFloors(new ArrayList<>());
+        this.directionStatus = directionStatus;
+        this.doorStatus = doorStatus;
+        this.currentAcceleration = currentAcceleration;
+        this.capacity = capacity;
+        this.currentFloor = currentFloor;
+        this.currentPosition = currentPosition;
+        this.currentSpeed = currentSpeed;
+        this.currentWeight = currentWeight;
+        this.currentFloorTarget = currentFloorTarget;
+        this.servicedFloors = servicedFloors;
+        this.selectedFloors = new ArrayList<>();
     }
 
     public CommittedDirection getDirectionStatus() {
@@ -65,9 +63,6 @@ public class ElevatorModel {
     }
 
     public void setCapacity(int capacity) {
-        if(capacity < 0){
-            throw new IllegalArgumentException("illegal capacity: " + capacity);
-        }
         this.capacity = capacity;
     }
 
@@ -186,6 +181,9 @@ public class ElevatorModel {
         }
 
         public void setCapacity(int capacity) {
+            if(capacity < 0){
+                throw new IllegalArgumentException("illegal capacity: " + capacity);
+            }
             this.capacity = capacity;
         }
 
