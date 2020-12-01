@@ -98,7 +98,7 @@ public class App extends Application  {
         elevators.add(elevator1);
         elevators.add(elevator2);
 
-        return new BuildingModel(elevators, floors);;
+        return new BuildingModel(elevators, floors);
     }
 
 }
