@@ -64,6 +64,7 @@ public class ElevatorBoxPane extends BorderPane {
             case CLOSED:
                 doorLeft.setFill(Color.RED);
                 doorRight.setFill(Color.RED);
+                break;
             default:
                 doorLeft.setFill(Color.ORANGE);
                 doorRight.setFill(Color.ORANGE);
