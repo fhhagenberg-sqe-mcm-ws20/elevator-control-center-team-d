@@ -1,18 +1,13 @@
 package at.fhhagenberg.sqe.panes;
 
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
-import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FloorIndicatorBarPane extends VBox {
     //TODO: are floors just identified by index

@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Stack;
-
 public class FloorPane extends HBox {
 
     private final Rectangle floorRect;
