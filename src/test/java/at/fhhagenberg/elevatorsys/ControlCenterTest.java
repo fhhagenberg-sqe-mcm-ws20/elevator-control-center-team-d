@@ -1,7 +1,6 @@
 package at.fhhagenberg.elevatorsys;
 
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
-import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
 import at.fhhagenberg.sqe.IElevator;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,7 +52,6 @@ class ControlCenterTest {
         //THEN
         assertEquals(2, controlCenter.getBuildingModel().getElevators().size());
         assertEquals(10, controlCenter.getBuildingModel().getFloors().size());
-        assertEquals(elevator, controlCenter.getElevatorApi());
     }
 
     @Test
@@ -76,15 +74,10 @@ class ControlCenterTest {
         //THEN
         assertEquals(CommittedDirection.DOWN, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentAcceleration());
-        assertEquals(DoorStatus.CLOSED, controlCenter.getDoorStatus(1));
-        assertEquals(1, controlCenter.getElevatorPosition(1));
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentPosition());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentSpeed());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCurrentWeight());
         assertEquals(1, controlCenter.getBuildingModel().getElevator(1).getCapacity());
-        assertEquals(false, controlCenter.getServicedFloors(1).contains(1));
-        assertEquals(1, controlCenter.getTarget(1));
-        assertEquals(CommittedDirection.DOWN, controlCenter.getCommittedDirection(1));
     }
 
     @Test
@@ -109,8 +102,6 @@ class ControlCenterTest {
 
         //THEN
         assertEquals(20, controlCenter.getBuildingModel().getFloor(1).getFloorHeight());
-        assertEquals(true, controlCenter.getFloorButtonUp(1));
-        assertEquals(true, controlCenter.getFloorButtonDown(1));
         assertEquals(1, controlCenter.getBuildingModel().getFloor(1).getFloorNr());
     }
 

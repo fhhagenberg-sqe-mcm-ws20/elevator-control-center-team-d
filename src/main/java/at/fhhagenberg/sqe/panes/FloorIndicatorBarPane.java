@@ -1,20 +1,15 @@
 package at.fhhagenberg.sqe.panes;
 
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
-import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class FloorIndicatorBarPane extends VBox implements PropertyChangeListener {
+public class FloorIndicatorBarPane extends VBox {
     //TODO: are floors just identified by index
     List<FloorIndicatorPane> floorIndicators = new ArrayList<FloorIndicatorPane>();
     public FloorIndicatorBarPane(int floorCount) {
@@ -34,14 +29,11 @@ public class FloorIndicatorBarPane extends VBox implements PropertyChangeListene
         return floorIndicators.get(floorNumber);
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        BuildingModel buildingModel = (BuildingModel) evt.getNewValue();
+    public void updateView(BuildingModel buildingModel) {
         List<FloorModel> floorModels = buildingModel.getFloors();
 
         for (int i = 0; i < floorIndicators.size(); i++) {
             floorIndicators.get(i).update(floorModels.get(i));
         }
-
     }
 }

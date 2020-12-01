@@ -2,16 +2,11 @@ package at.fhhagenberg.sqe.panes;
 
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
-import javafx.geometry.Orientation;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
-public class ElevatorsPane extends HBox implements PropertyChangeListener {
+public class ElevatorsPane extends HBox {
 
     ElevatorPane[] elevators;
     private final int numberOfElevators;
@@ -28,9 +23,7 @@ public class ElevatorsPane extends HBox implements PropertyChangeListener {
         this.getChildren().addAll(elevators);
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        BuildingModel buildingModel = (BuildingModel) evt.getNewValue();
+    public void updateView(BuildingModel buildingModel) {
         List<ElevatorModel> elevatorModels = buildingModel.getElevators();
 
         for (int i = 0; i < numberOfElevators; i++) {

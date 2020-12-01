@@ -2,10 +2,6 @@ package at.fhhagenberg.sqe.panes;
 
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
 import at.fhhagenberg.elevatorsys.models.DoorStatus;
-import at.fhhagenberg.elevatorsys.models.ElevatorModel;
-import javafx.geometry.Orientation;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 

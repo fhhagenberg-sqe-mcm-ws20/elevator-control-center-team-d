@@ -1,7 +1,5 @@
 package at.fhhagenberg.elevatorsys.models;
 
-import at.fhhagenberg.sqe.IElevator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +21,17 @@ public class ElevatorModel {
     public ElevatorModel(CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
                          int currentFloorTarget, List<Integer> servicedFloors) {
-        setDirectionStatus(directionStatus);
-        setDoorStatus(doorStatus);
-        setCurrentAcceleration(currentAcceleration);
+        this.directionStatus = directionStatus;
+        this.doorStatus = doorStatus;
+        this.currentAcceleration = currentAcceleration;
         setCapacity(capacity);
-        setCurrentFloor(currentFloor);
-        setCurrentPosition(currentPosition);
-        setCurrentSpeed(currentSpeed);
+        this.currentFloor = currentFloor;
+        this.currentPosition = currentPosition;
+        this.currentSpeed = currentSpeed;
         setCurrentWeight(currentWeight);
-        setCurrentFloorTarget(currentFloorTarget);
-        setServicedFloors(servicedFloors);
-        setSelectedFloors(new ArrayList<>());
+        this.currentFloorTarget = currentFloorTarget;
+        this.servicedFloors = servicedFloors;
+        this.selectedFloors = new ArrayList<>();
     }
 
     public CommittedDirection getDirectionStatus() {
@@ -173,12 +171,12 @@ public class ElevatorModel {
         private int currentFloorTarget;
         private List<Integer> servicedFloors = new ArrayList<>();
 
-        public void setDirectionStatus(CommittedDirection directionStatus) {
-            this.directionStatus = directionStatus;
+        public void setDirectionStatus(int directionStatus) {
+            this.directionStatus = CommittedDirection.values()[directionStatus];
         }
 
-        public void setDoorStatus(DoorStatus doorStatus) {
-            this.doorStatus = doorStatus;
+        public void setDoorStatus(int doorStatus) {
+            this.doorStatus = DoorStatus.fromInt(doorStatus);
         }
 
         public void setCurrentAcceleration(int currentAcceleration) {

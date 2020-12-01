@@ -3,11 +3,8 @@ package at.fhhagenberg.sqe.panes;
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
 import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
-import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -19,7 +16,6 @@ public class ElevatorPane extends VBox {
 
     public ElevatorPane(int numberOfFloors) {
         assert numberOfFloors > 0;
-        //this.setOrientation(Orientation.VERTICAL);
         elevatorFloorPane = new ElevatorFloorPane(numberOfFloors);
         Button manualButton = new Button("  MANUAL  ");
         Button autoButton = new Button("AUTOMATIC");

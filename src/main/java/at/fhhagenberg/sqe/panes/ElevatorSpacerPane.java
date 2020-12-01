@@ -1,11 +1,9 @@
 package at.fhhagenberg.sqe.panes;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 public class ElevatorSpacerPane extends VBox {
 

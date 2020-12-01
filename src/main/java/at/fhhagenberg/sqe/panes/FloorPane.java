@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Stack;
-
 public class FloorPane extends HBox {
 
     private final Rectangle floorRect;
@@ -36,7 +34,7 @@ public class FloorPane extends HBox {
         lightCircle.setFill(Color.BLACK);
         HBox underlineBox = new HBox(bufferRect, lightCircle);
         underlineBox.setAlignment(Pos.CENTER_LEFT);
-        underlineBox.setPrefWidth(50);
+        underlineBox.setPrefWidth(80);
         underlineBox.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, Color.TRANSPARENT, Color.DARKGRAY, Color.TRANSPARENT,
                 BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.DASHED, BorderStrokeStyle.NONE,
                 CornerRadii.EMPTY, BorderWidths.DEFAULT, Insets.EMPTY)));
