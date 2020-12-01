@@ -16,10 +16,8 @@ public class ControlCenter {
     private IElevator elevatorApi;
 
     private List<PropertyChangeListener> listener = new ArrayList<>();
-    private PropertyChangeSupport support;
 
     public ControlCenter(IElevator elevatorApi) {
-        support = new PropertyChangeSupport(this);
         this.elevatorApi = elevatorApi;
         try {
             //TODO: change to updateBuilding? but what if it fails because of a changed tick? stays uninitialized
@@ -38,7 +36,7 @@ public class ControlCenter {
         listener.add(newListener);
     }
 
-    private void notifyListeners(Object object, String property, BuildingModel oldValue, BuildingModel newValue) {
+    private void notifyListeners(String property, BuildingModel oldValue, BuildingModel newValue) {
         for (PropertyChangeListener name : listener) {
             name.propertyChange(new PropertyChangeEvent(this, property, oldValue, newValue));
         }
@@ -52,7 +50,7 @@ public class ControlCenter {
         if(tickStart != this.elevatorApi.getClockTick()){
             return false;
         }
-        notifyListeners(this, "BuildingModel", this.buildingModel, buildingModelNew);
+        notifyListeners("BuildingModel", this.buildingModel, buildingModelNew);
         buildingModel.update(buildingModelNew);
         return true;
     }
