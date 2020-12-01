@@ -13,7 +13,13 @@ public class FloorPane extends HBox {
     private final Circle lightCircle;
     private StackPane stackPane;
 
-    public FloorPane() {
+    private int floorNumber;
+    private int elevatorNumber;
+
+    public FloorPane(int elevatorNumber, int floorNumber) {
+        this.elevatorNumber = elevatorNumber;
+        this.floorNumber = floorNumber;
+
         floorRect = new Rectangle();
         floorRect.setWidth(49);
         floorRect.setHeight(49);
@@ -42,7 +48,7 @@ public class FloorPane extends HBox {
         this.getChildren().addAll(stackPane, underlineBox);
     }
 
-    public void setFloor(ElevatorBoxPane elevator) {
+    public void setCurrentElevatorFloor(ElevatorBoxPane elevator) {
         stackPane.getChildren().add(elevator);
     }
 
@@ -52,12 +58,24 @@ public class FloorPane extends HBox {
         }
     }
 
+    public Rectangle getFloorRect() {
+        return floorRect;
+    }
+
     public void setLight(Color color) {
         lightCircle.setFill(color);
     }
 
     public void unsetLight() {
         lightCircle.setFill(Color.BLACK);
+    }
+
+    public int getFloorNumber() {
+        return floorNumber;
+    }
+
+    public int getElevatorNumber() {
+        return elevatorNumber;
     }
 
 }

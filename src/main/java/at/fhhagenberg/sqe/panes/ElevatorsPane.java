@@ -2,7 +2,10 @@ package at.fhhagenberg.sqe.panes;
 
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+
 
 import java.util.List;
 
@@ -12,13 +15,13 @@ public class ElevatorsPane extends HBox {
     private final int numberOfElevators;
     private final int numberOfFloors;
 
-    public ElevatorsPane(int numberOfElevators, int numberOfFloors) {
+    public ElevatorsPane(int numberOfElevators, int numberOfFloors, EventHandler<MouseEvent> eventHandler) {
         this.numberOfElevators = numberOfElevators;
         this.numberOfFloors = numberOfFloors;
         elevators = new ElevatorPane[numberOfElevators];
 
         for (int i = 0; i < numberOfElevators; i++) {
-            elevators[i] = new ElevatorPane(numberOfFloors);
+            elevators[i] = new ElevatorPane(i, numberOfFloors, eventHandler);
         }
         this.getChildren().addAll(elevators);
     }

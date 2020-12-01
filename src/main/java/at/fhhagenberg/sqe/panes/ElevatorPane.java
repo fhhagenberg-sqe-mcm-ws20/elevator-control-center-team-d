@@ -3,22 +3,32 @@ package at.fhhagenberg.sqe.panes;
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
 import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+
 
 public class ElevatorPane extends VBox {
 
     private final ElevatorFloorPane elevatorFloorPane;
     private final Label payloadLabel;
     private final Label speedLabel;
+    
+    private int elevatorNumber;
 
-    public ElevatorPane(int numberOfFloors) {
+    public ElevatorPane(int elevatorNumber, int numberOfFloors, EventHandler<MouseEvent> eventHandler) {
         assert numberOfFloors > 0;
-        elevatorFloorPane = new ElevatorFloorPane(numberOfFloors);
+        this.elevatorNumber = elevatorNumber;
+        elevatorFloorPane = new ElevatorFloorPane(elevatorNumber, numberOfFloors, eventHandler);
         Button manualButton = new Button("  MANUAL  ");
+        manualButton.setUserData(elevatorNumber);
         Button autoButton = new Button("AUTOMATIC");
+        autoButton.setUserData(elevatorNumber);
+        manualButton.setOnMouseClicked(eventHandler);
+        autoButton.setOnMouseClicked(eventHandler);
         payloadLabel = new Label("payload: ");
         speedLabel = new Label("speed: ");
         this.getChildren().addAll(elevatorFloorPane, manualButton,autoButton, payloadLabel, speedLabel);
@@ -71,6 +81,10 @@ public class ElevatorPane extends VBox {
 
     public void unsetAllFloors() {
         elevatorFloorPane.unsetAllFloors();
+    }
+
+    public int getElevatorNumber() {
+        return elevatorNumber;
     }
 
 }

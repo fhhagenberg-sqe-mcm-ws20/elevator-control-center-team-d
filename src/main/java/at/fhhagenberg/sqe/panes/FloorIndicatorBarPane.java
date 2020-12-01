@@ -16,7 +16,7 @@ public class FloorIndicatorBarPane extends VBox {
         this.setHeight((double)floorCount*50);
 
         for(int i = 0; i < floorCount; i++){
-            FloorIndicatorPane indicator = new FloorIndicatorPane(floorCount - i);
+            FloorIndicatorPane indicator = new FloorIndicatorPane(floorCount - i - 1);
             indicator.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, Color.TRANSPARENT, Color.DARKGRAY, Color.TRANSPARENT,
                                             BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.DASHED, BorderStrokeStyle.NONE,
                                             CornerRadii.EMPTY, BorderWidths.DEFAULT, Insets.EMPTY)));

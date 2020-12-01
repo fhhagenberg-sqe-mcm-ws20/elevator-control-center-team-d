@@ -2,8 +2,12 @@ package at.fhhagenberg.sqe.panes;
 
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
 import at.fhhagenberg.elevatorsys.models.DoorStatus;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+
+
 
 public class ElevatorFloorPane extends VBox {
 
@@ -11,21 +15,22 @@ public class ElevatorFloorPane extends VBox {
     private final int numberOfFloors;
     private final ElevatorBoxPane elevator;
 
-    public ElevatorFloorPane(int numberOfFloors) {
+    public ElevatorFloorPane(int elevatorNumber, int numberOfFloors, EventHandler<MouseEvent> eventHandler) {
         this.numberOfFloors = numberOfFloors-1;
         this.elevator = new ElevatorBoxPane();
         floors = new FloorPane[numberOfFloors];
 
         for (int i = 0; i < numberOfFloors; i++) {
-            floors[i] = new FloorPane();
+            floors[i] = new FloorPane(elevatorNumber, numberOfFloors - i - 1);
+            floors[i].setOnMouseClicked(eventHandler);
         }
-        floors[numberOfFloors-1].setFloor(elevator);
+        floors[numberOfFloors-1].setCurrentElevatorFloor(elevator);
         this.getChildren().addAll(floors);
     }
 
     public void setFloor(int level) {
         assert level <= numberOfFloors;
-        floors[numberOfFloors-level].setFloor(elevator);
+        floors[numberOfFloors-level].setCurrentElevatorFloor(elevator);
     }
 
     public void unsetFloor(int level) {
