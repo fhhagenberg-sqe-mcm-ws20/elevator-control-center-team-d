@@ -23,8 +23,6 @@ public class App extends Application  {
     @Override
     public void start(Stage stage) {
 
-        //TODO: create controlCenter and get Data to define screen Size
-        ControlCenter controlCenter = new ControlCenter(mock(IElevator.class));
 
         int elevatorCount = controlCenter.getNumberOfElevators();
         int floorCount = controlCenter.getNumberOfFloors();
