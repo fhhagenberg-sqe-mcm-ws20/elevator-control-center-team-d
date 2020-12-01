@@ -24,11 +24,11 @@ public class ElevatorModel {
         this.directionStatus = directionStatus;
         this.doorStatus = doorStatus;
         this.currentAcceleration = currentAcceleration;
-        this.capacity = capacity;
+        setCapacity(capacity);
         this.currentFloor = currentFloor;
         this.currentPosition = currentPosition;
         this.currentSpeed = currentSpeed;
-        this.currentWeight = currentWeight;
+        setCurrentWeight(currentWeight);
         this.currentFloorTarget = currentFloorTarget;
         this.servicedFloors = servicedFloors;
         this.selectedFloors = new ArrayList<>();
@@ -63,6 +63,9 @@ public class ElevatorModel {
     }
 
     public void setCapacity(int capacity) {
+        if(capacity < 0){
+            throw new IllegalArgumentException("illegal capacity: " + capacity);
+        }
         this.capacity = capacity;
     }
 
@@ -181,9 +184,6 @@ public class ElevatorModel {
         }
 
         public void setCapacity(int capacity) {
-            if(capacity < 0){
-                throw new IllegalArgumentException("illegal capacity: " + capacity);
-            }
             this.capacity = capacity;
         }
 
