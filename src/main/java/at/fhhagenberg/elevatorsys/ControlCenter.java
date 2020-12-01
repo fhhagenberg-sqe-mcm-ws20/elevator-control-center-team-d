@@ -35,9 +35,9 @@ public class ControlCenter {
         listener.add(newListener);
     }
 
-    private void notifyListeners(String property, BuildingModel oldValue, BuildingModel newValue) {
+    private void notifyListeners(BuildingModel oldValue, BuildingModel newValue) {
         for (PropertyChangeListener name : listener) {
-            name.propertyChange(new PropertyChangeEvent(this, property, oldValue, newValue));
+            name.propertyChange(new PropertyChangeEvent(this, "BuildingModel", oldValue, newValue));
         }
     }
 
@@ -49,7 +49,7 @@ public class ControlCenter {
         if(tickStart != this.elevatorApi.getClockTick()){
             return false;
         }
-        notifyListeners("BuildingModel", this.buildingModel, buildingModelNew);
+        notifyListeners(this.buildingModel, buildingModelNew);
         buildingModel.update(buildingModelNew);
         return true;
     }
