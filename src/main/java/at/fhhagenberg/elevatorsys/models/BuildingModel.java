@@ -41,4 +41,8 @@ public class BuildingModel {
     public void setFloors(List<FloorModel> floors) {
         this.floors = floors;
     }
+
+    public void setAutomaticControl(int elevatorNumber, boolean automatic) {
+        elevators.get(elevatorNumber).setAutomaticControl(automatic);
+    }
 }

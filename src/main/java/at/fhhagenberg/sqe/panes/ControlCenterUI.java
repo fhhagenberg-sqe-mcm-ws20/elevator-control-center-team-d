@@ -16,7 +16,7 @@ public class ControlCenterUI extends HBox implements PropertyChangeListener {
         this.controlCenter = controlCenter;
         controlCenter.addChangeListener(this);
         floorIndicators = new FloorIndicatorBarPane(controlCenter.getNumberOfFloors());
-        elevators = new ElevatorsPane(controlCenter.getNumberOfElevators(), controlCenter.getNumberOfFloors());
+        elevators = new ElevatorsPane(controlCenter.getNumberOfElevators(), controlCenter.getNumberOfFloors(), controlCenter);
         updateUI();
 
         this.getChildren().addAll(floorIndicators, elevators);

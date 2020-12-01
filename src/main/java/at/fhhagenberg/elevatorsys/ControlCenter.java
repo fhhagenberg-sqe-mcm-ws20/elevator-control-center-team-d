@@ -1,7 +1,13 @@
 package at.fhhagenberg.elevatorsys;
 
-import at.fhhagenberg.elevatorsys.models.*;
+import at.fhhagenberg.elevatorsys.models.BuildingModel;
+import at.fhhagenberg.elevatorsys.models.ElevatorModel;
+import at.fhhagenberg.elevatorsys.models.FloorModel;
 import at.fhhagenberg.sqe.IElevator;
+import at.fhhagenberg.sqe.panes.FloorPane;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -9,7 +15,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControlCenter {
+public class ControlCenter implements EventHandler<MouseEvent> {
 
     private BuildingModel buildingModel;
     private IElevator elevatorApi;
@@ -22,7 +28,7 @@ public class ControlCenter {
             //TODO: change to updateBuilding? but what if it fails because of a changed tick? stays uninitialized
             buildingModel = queryBuilding();
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.print(e.getLocalizedMessage());
         }
     }
 
@@ -115,4 +121,28 @@ public class ControlCenter {
         return buildingModel.getElevators().size();
     }
 
+    private void setAutomaticControl(int elevatorNumber, boolean automatic) {
+        System.out.println("Elevator " + elevatorNumber + " automatic controlled enabled: " + automatic);
+        buildingModel.setAutomaticControl(elevatorNumber, automatic);
+    }
+
+    private void setElevatorTarget(int elevatorNumber, int targetFloor) {
+        //TODO: use api call
+        System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
+//        elevatorApi.setTarget(elevatorNumber, targetFloor);
+    }
+
+    @Override
+    public void handle(MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() instanceof FloorPane) {
+            FloorPane floorPane = (FloorPane) mouseEvent.getSource();
+            setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
+        } else {
+            Button button = (Button) mouseEvent.getSource();
+            boolean automatic = button.getText().equalsIgnoreCase("AUTOMATIC"); //  ¯\_(ツ)_/¯ it just works!
+            int elevatorNumber = (int) button.getUserData();
+            setAutomaticControl(elevatorNumber, automatic);
+        }
+
+    }
 }
