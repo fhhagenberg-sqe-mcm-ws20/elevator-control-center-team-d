@@ -171,12 +171,12 @@ public class ElevatorModel {
         private int currentFloorTarget;
         private List<Integer> servicedFloors = new ArrayList<>();
 
-        public void setDirectionStatus(CommittedDirection directionStatus) {
-            this.directionStatus = directionStatus;
+        public void setDirectionStatus(int directionStatus) {
+            this.directionStatus = CommittedDirection.values()[directionStatus];
         }
 
-        public void setDoorStatus(DoorStatus doorStatus) {
-            this.doorStatus = doorStatus;
+        public void setDoorStatus(int doorStatus) {
+            this.doorStatus = DoorStatus.fromInt(doorStatus);
         }
 
         public void setCurrentAcceleration(int currentAcceleration) {

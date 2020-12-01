@@ -5,7 +5,6 @@ import at.fhhagenberg.sqe.IElevator;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,9 +76,8 @@ public class ControlCenter {
 
         ElevatorModel.ElevatorModelBuilder builder = new ElevatorModel.ElevatorModelBuilder();
 
-        //TODO: convert int to enum here or inside?
-        builder.setDirectionStatus(CommittedDirection.values()[elevatorApi.getCommittedDirection(elevatorNumber)]);
-        builder.setDoorStatus(DoorStatus.fromInt(elevatorApi.getElevatorDoorStatus(elevatorNumber)));
+        builder.setDirectionStatus(elevatorApi.getCommittedDirection(elevatorNumber));
+        builder.setDoorStatus(elevatorApi.getElevatorDoorStatus(elevatorNumber));
         builder.setCurrentAcceleration(elevatorApi.getElevatorAccel(elevatorNumber));
         builder.setCapacity(elevatorApi.getElevatorCapacity(elevatorNumber));
         builder.setCurrentFloor(elevatorApi.getElevatorFloor(elevatorNumber));
