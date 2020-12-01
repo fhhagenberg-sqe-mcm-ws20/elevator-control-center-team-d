@@ -1,10 +1,10 @@
 package at.fhhagenberg.elevatorsys;
 
-import at.fhhagenberg.elevatorsys.models.*;
+import at.fhhagenberg.elevatorsys.models.BuildingModel;
+import at.fhhagenberg.elevatorsys.models.ElevatorModel;
+import at.fhhagenberg.elevatorsys.models.FloorModel;
 import at.fhhagenberg.sqe.IElevator;
 import at.fhhagenberg.sqe.panes.FloorPane;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
