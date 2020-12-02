@@ -58,7 +58,7 @@ public class ElevatorPane extends VBox {
     }
 
     public void setLightSelected(int floor) {
-        elevatorFloorPane.setFloorLight(floor, Color.YELLOW);
+        elevatorFloorPane.setFloorLight(floor, Color.ORANGE);
     }
 
     public void setLightTarget(int floor) {
