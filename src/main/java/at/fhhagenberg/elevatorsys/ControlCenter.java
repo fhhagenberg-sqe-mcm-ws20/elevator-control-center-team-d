@@ -122,14 +122,16 @@ public class ControlCenter implements EventHandler<MouseEvent> {
     }
 
     private void setAutomaticControl(int elevatorNumber, boolean automatic) {
-        System.out.println("Elevator " + elevatorNumber + " automatic controlled enabled: " + automatic);
+        System.out.println("Elevator " + elevatorNumber + " automatic control enabled: " + automatic);
         buildingModel.setAutomaticControl(elevatorNumber, automatic);
     }
 
     private void setElevatorTarget(int elevatorNumber, int targetFloor) {
         //TODO: use api call
-        System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
-//        elevatorApi.setTarget(elevatorNumber, targetFloor);
+        if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {
+            System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
+    //      elevatorApi.setTarget(elevatorNumber, targetFloor);
+        }
     }
 
     @Override
