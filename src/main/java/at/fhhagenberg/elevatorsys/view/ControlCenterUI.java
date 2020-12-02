@@ -1,4 +1,4 @@
-package at.fhhagenberg.sqe.panes;
+package at.fhhagenberg.elevatorsys.view;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
 import javafx.scene.layout.HBox;

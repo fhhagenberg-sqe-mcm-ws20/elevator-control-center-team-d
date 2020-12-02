@@ -1,4 +1,4 @@
-package at.fhhagenberg.sqe.panes;
+package at.fhhagenberg.elevatorsys.view;
 
 import at.fhhagenberg.elevatorsys.models.FloorModel;
 import javafx.geometry.Insets;

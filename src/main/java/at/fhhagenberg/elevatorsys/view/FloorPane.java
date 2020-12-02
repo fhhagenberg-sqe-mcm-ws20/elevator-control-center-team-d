@@ -1,4 +1,4 @@
-package at.fhhagenberg.sqe.panes;
+package at.fhhagenberg.elevatorsys.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

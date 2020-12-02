@@ -78,7 +78,7 @@
                 <version>0.0.5</version>
                 <configuration>
                     <launcher>launcher</launcher>
-                    <mainClass>at.fhhagenberg.sqe.App</mainClass>
+                    <mainClass>at.fhhagenberg.elevatorsys.App</mainClass>
                 </configuration>
             </plugin>
             <plugin>

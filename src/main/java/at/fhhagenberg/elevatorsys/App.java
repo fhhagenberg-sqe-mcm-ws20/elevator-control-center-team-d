@@ -1,9 +1,9 @@
-package at.fhhagenberg.sqe;
+package at.fhhagenberg.elevatorsys;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
 import at.fhhagenberg.elevatorsys.models.*;
-import at.fhhagenberg.sqe.panes.ControlCenterUI;
-import at.fhhagenberg.sqe.panes.ElevatorsPane;
+import at.fhhagenberg.elevatorsys.view.ControlCenterUI;
+import at.fhhagenberg.elevatorsys.view.ElevatorsPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
