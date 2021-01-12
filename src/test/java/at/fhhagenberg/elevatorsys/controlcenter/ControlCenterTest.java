@@ -1,5 +1,6 @@
-package at.fhhagenberg.elevatorsys;
+package at.fhhagenberg.elevatorsys.controlcenter;
 
+import at.fhhagenberg.elevatorsys.ControlCenter;
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
 import at.fhhagenberg.sqe.IElevator;

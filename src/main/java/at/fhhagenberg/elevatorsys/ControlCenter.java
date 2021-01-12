@@ -55,8 +55,8 @@ public class ControlCenter implements EventHandler<MouseEvent> {
         if(tickStart != this.elevatorApi.getClockTick()){
             return false;
         }
-        notifyListeners(this.buildingModel, buildingModelNew);
         buildingModel.update(buildingModelNew);
+        notifyListeners(this.buildingModel, buildingModelNew);
         return true;
     }
 
