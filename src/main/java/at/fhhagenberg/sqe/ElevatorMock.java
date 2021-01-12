@@ -11,7 +11,7 @@ public class ElevatorMock implements IElevator {
     private int currentTick = 0;
     private boolean changeTicker = false;
 
-    private BuildingModel buildingModel;
+    private final BuildingModel buildingModel;
 
     public ElevatorMock() {
         buildingModel = createDummyModel();
@@ -19,15 +19,7 @@ public class ElevatorMock implements IElevator {
 
     @Override
     public int getCommittedDirection(int elevatorNumber) throws RemoteException {
-        switch (buildingModel.getElevator(elevatorNumber).getDirectionStatus()) {
-            case UP:
-                return 0;
-            case DOWN:
-                return 1;
-            case UNCOMMITTED:
-                return 2;
-        }
-        return 2;
+        return buildingModel.getElevator(elevatorNumber).getDirectionStatus().getValue();
     }
 
     @Override
@@ -42,17 +34,7 @@ public class ElevatorMock implements IElevator {
 
     @Override
     public int getElevatorDoorStatus(int elevatorNumber) throws RemoteException {
-        switch (buildingModel.getElevator(elevatorNumber).getDoorStatus()) {
-            case OPEN:
-                return 1;
-            case CLOSED:
-                return 2;
-            case OPENING:
-                return 3;
-            case CLOSING:
-                return 4;
-        }
-        return 2;
+        return buildingModel.getElevator(elevatorNumber).getDoorStatus().getValue();
     }
 
     @Override
@@ -117,19 +99,8 @@ public class ElevatorMock implements IElevator {
 
     @Override
     public void setCommittedDirection(int elevatorNumber, int direction) throws RemoteException {
-        CommittedDirection committedDirection;
-        switch (direction) {
-            case 0:
-                committedDirection = CommittedDirection.UP;
-                break;
-            case 1:
-                committedDirection = CommittedDirection.DOWN;
-                break;
-            default:
-                committedDirection = CommittedDirection.UNCOMMITTED;
-        }
-
-        buildingModel.getElevator(elevatorNumber).setDirectionStatus(committedDirection);
+        buildingModel.getElevator(elevatorNumber)
+                .setDirectionStatus(CommittedDirection.valueOf(direction));
     }
 
     @Override
@@ -234,5 +205,4 @@ public class ElevatorMock implements IElevator {
 
         return new BuildingModel(elevators, floors);
     }
-
 }

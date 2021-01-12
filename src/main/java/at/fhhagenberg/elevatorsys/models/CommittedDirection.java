@@ -1,7 +1,33 @@
 package at.fhhagenberg.elevatorsys.models;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
 public enum CommittedDirection {
-    UP,
-    DOWN,
-    UNCOMMITTED;
+    UP(1),
+    DOWN(2),
+    UNCOMMITTED(3);
+
+    private final int value;
+    private static final Map map = new HashMap<>();
+
+    CommittedDirection(int value) {
+        this.value = value;
+    }
+
+    static {
+        for (CommittedDirection committedDirection : CommittedDirection.values()) {
+            map.put(committedDirection.value, committedDirection);
+        }
+    }
+
+    public static CommittedDirection valueOf(int committedDirection) {
+        return (CommittedDirection) map.get(committedDirection);
+    }
+
+    public int getValue() {
+        return value;
+    }
+
 }
