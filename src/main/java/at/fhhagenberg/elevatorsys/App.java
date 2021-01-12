@@ -1,7 +1,5 @@
 package at.fhhagenberg.elevatorsys;
 
-import at.fhhagenberg.elevatorsys.ControlCenter;
-import at.fhhagenberg.elevatorsys.models.*;
 import at.fhhagenberg.elevatorsys.view.ControlCenterUI;
 import at.fhhagenberg.elevatorsys.view.ElevatorsPane;
 import at.fhhagenberg.sqe.ElevatorMock;
@@ -10,12 +8,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * JavaFX App
