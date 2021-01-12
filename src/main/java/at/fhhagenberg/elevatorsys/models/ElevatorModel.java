@@ -14,7 +14,7 @@ public class ElevatorModel {
     private int currentSpeed;
     private int currentWeight;
     private int currentFloorTarget;
-    private boolean automaticControlActivated = true;
+    private boolean automaticControlActivated = false;
     private List<Integer> servicedFloors;
     private List<Integer> selectedFloors;
 

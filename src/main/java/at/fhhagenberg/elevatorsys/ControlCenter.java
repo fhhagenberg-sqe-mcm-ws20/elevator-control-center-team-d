@@ -126,11 +126,11 @@ public class ControlCenter implements EventHandler<MouseEvent> {
         buildingModel.setAutomaticControl(elevatorNumber, automatic);
     }
 
-    private void setElevatorTarget(int elevatorNumber, int targetFloor) {
+    private void setElevatorTarget(int elevatorNumber, int targetFloor) throws RemoteException {
         //TODO: use api call
         if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {
             System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
-    //      elevatorApi.setTarget(elevatorNumber, targetFloor);
+            elevatorApi.setTarget(elevatorNumber, targetFloor);
         }
     }
 
@@ -138,7 +138,11 @@ public class ControlCenter implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getSource() instanceof FloorPane) {
             FloorPane floorPane = (FloorPane) mouseEvent.getSource();
-            setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
+            try {
+                setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         } else {
             Button button = (Button) mouseEvent.getSource();
             boolean automatic = button.getText().equalsIgnoreCase("AUTOMATIC"); //  ¯\_(ツ)_/¯ it just works!

@@ -22,6 +22,7 @@ public class ElevatorFloorPane extends VBox {
 
         for (int i = 0; i < numberOfFloors; i++) {
             floors[i] = new FloorPane(elevatorNumber, numberOfFloors - i - 1);
+            floors[i].setId("floor" + (numberOfFloors - i - 1));
             floors[i].setOnMouseClicked(eventHandler);
         }
         floors[numberOfFloors-1].setCurrentElevatorFloor(elevator);
