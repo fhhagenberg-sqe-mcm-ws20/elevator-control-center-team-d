@@ -122,14 +122,11 @@ public class ControlCenter implements EventHandler<MouseEvent> {
     }
 
     private void setAutomaticControl(int elevatorNumber, boolean automatic) {
-        System.out.println("Elevator " + elevatorNumber + " automatic control enabled: " + automatic);
         buildingModel.setAutomaticControl(elevatorNumber, automatic);
     }
 
     private void setElevatorTarget(int elevatorNumber, int targetFloor) throws RemoteException {
-        //TODO: use api call
-        if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {
-            System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
+        if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
             elevatorApi.setTarget(elevatorNumber, targetFloor);
         }
     }
@@ -141,7 +138,7 @@ public class ControlCenter implements EventHandler<MouseEvent> {
             try {
                 setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
             } catch (RemoteException e) {
-                e.printStackTrace();
+                System.out.print(e.getLocalizedMessage());
             }
         } else {
             Button button = (Button) mouseEvent.getSource();
