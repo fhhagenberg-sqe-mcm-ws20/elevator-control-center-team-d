@@ -126,7 +126,7 @@ public class ControlCenter implements EventHandler<MouseEvent> {
     }
 
     private void setElevatorTarget(int elevatorNumber, int targetFloor) throws RemoteException {
-        if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
+        if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {
             elevatorApi.setTarget(elevatorNumber, targetFloor);
         }
     }

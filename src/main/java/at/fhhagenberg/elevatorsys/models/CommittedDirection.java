@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum CommittedDirection {
-    UP(1),
-    DOWN(2),
-    UNCOMMITTED(3);
+    UP(0),
+    DOWN(1),
+    UNCOMMITTED(2);
 
     private final int value;
     private static final Map map = new HashMap<>();
@@ -29,5 +29,4 @@ public enum CommittedDirection {
     public int getValue() {
         return value;
     }
-
 }
