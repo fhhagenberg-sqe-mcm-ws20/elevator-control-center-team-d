@@ -12,7 +12,7 @@ import sqelevator.factory.ApiFactory;
  */
 public class App extends Application  {
 
-    private ApiFactory apiFactory;
+    private final ApiFactory apiFactory;
 
     private ControlCenter controlCenter;
     private IElevatorSystem elevatorApi;
