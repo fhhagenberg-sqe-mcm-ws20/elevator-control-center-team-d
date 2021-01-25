@@ -46,6 +46,7 @@ class GUIApplicationTest {
         elevatorAPI.setTarget(0, 3);
         elevatorAPI.setTarget(1, 4);
         elevatorAPI.setTarget(2, 5);
+
         Platform.runLater(() -> {
             try {
                 controlCenter.updateBuilding();
@@ -54,6 +55,7 @@ class GUIApplicationTest {
             }
         });
         robot.sleep(1000);
+
         Circle circleElevator0 = robot
                 .lookup("#elevator0")
                 .lookup("#floor3")
@@ -112,3 +114,8 @@ class GUIApplicationTest {
     }
 
 }
+
+// Set style class instead of setting color directly for target lights. With the name ("targeted")
+// call control center update building on fx thread and then wait until that is executed -> use fxRobot.interact
+// Use App in test
+
