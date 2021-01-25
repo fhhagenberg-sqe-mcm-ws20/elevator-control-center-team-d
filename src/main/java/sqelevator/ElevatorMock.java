@@ -6,14 +6,15 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElevatorMock implements IElevator {
+public class ElevatorMock implements IElevatorSystem {
 
     private int currentTick = 0;
     private boolean changeTicker = false;
 
-    private final BuildingModel buildingModel;
+    private BuildingModel buildingModel;
 
-    public ElevatorMock() {
+    @Override
+    public void connect() {
         buildingModel = createDummyModel();
     }
 
