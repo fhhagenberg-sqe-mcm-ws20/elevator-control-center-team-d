@@ -27,6 +27,7 @@ public class App extends Application  {
         elevatorApi.connect();
         controlCenter = new ControlCenter(elevatorApi);
         ControlCenterUI controlCenterUI = new ControlCenterUI(controlCenter);
+        //Todo: make windowSize dynamic?
         var scene = new Scene(controlCenterUI, 1000, 700);
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");
