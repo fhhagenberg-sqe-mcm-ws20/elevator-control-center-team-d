@@ -3,11 +3,11 @@ package at.fhhagenberg.elevatorsys;
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
-import sqelevator.IElevator;
 import at.fhhagenberg.elevatorsys.view.FloorPane;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import sqelevator.IElevatorSystem;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -18,11 +18,11 @@ import java.util.List;
 public class ControlCenter implements EventHandler<MouseEvent> {
 
     private BuildingModel buildingModel;
-    private IElevator elevatorApi;
+    private IElevatorSystem elevatorApi;
 
     private List<PropertyChangeListener> listener = new ArrayList<>();
 
-    public ControlCenter(IElevator elevatorApi) {
+    public ControlCenter(IElevatorSystem elevatorApi) {
         this.elevatorApi = elevatorApi;
         try {
             //TODO: change to updateBuilding? but what if it fails because of a changed tick? stays uninitialized

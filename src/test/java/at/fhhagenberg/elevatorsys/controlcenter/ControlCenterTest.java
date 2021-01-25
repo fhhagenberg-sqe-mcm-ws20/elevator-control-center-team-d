@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import sqelevator.IElevatorSystem;
 
 import java.rmi.RemoteException;
 
@@ -19,12 +20,12 @@ import static org.mockito.Mockito.mock;
 
 class ControlCenterTest {
 
-    IElevator elevator;
+    IElevatorSystem elevator;
 
     @BeforeEach
     void beforeEach() throws RemoteException {
         //GIVEN
-        elevator = mock(IElevator.class);
+        elevator = mock(IElevatorSystem.class);
         Mockito.when(elevator.getElevatorNum()).thenReturn(2);
         Mockito.when(elevator.getFloorNum()).thenReturn(10);
 

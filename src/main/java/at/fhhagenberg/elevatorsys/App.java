@@ -1,35 +1,33 @@
 package at.fhhagenberg.elevatorsys;
 
 import at.fhhagenberg.elevatorsys.view.ControlCenterUI;
-import at.fhhagenberg.elevatorsys.view.ElevatorsPane;
-import sqelevator.ElevatorMock;
-import sqelevator.IElevator;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.rmi.Naming;
+import sqelevator.IElevatorSystem;
+import sqelevator.factory.ApiFactory;
 
 /**
  * JavaFX App
  */
 public class App extends Application  {
 
-    private ElevatorsPane elevatorPane;
+    private ApiFactory apiFactory;
+
+    private ControlCenter controlCenter;
+    private IElevatorSystem elevatorApi;
+
+    public App(ApiFactory apiFactory) {
+        this.apiFactory = apiFactory;
+    }
 
     @Override
     public void start(Stage stage) {
-        //TODO: Make a API Factory which creates the elevator interface
-        ControlCenter controlCenter;
-        try {
-            IElevator elevatorApi =  (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
-            controlCenter = new ControlCenter(elevatorApi);
-        } catch (Exception e) {
-            IElevator elevatorMock = new ElevatorMock();
-            controlCenter = new ControlCenter(elevatorMock);
-        }
-
+        elevatorApi = apiFactory.createElevatorApi();
+        elevatorApi.connect();
+        controlCenter = new ControlCenter(elevatorApi);
         ControlCenterUI controlCenterUI = new ControlCenterUI(controlCenter);
+        //Todo: make windowSize dynamic?
         var scene = new Scene(controlCenterUI, 1000, 700);
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");
@@ -38,5 +36,13 @@ public class App extends Application  {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public ControlCenter getControlCenter() {
+        return controlCenter;
+    }
+
+    public IElevatorSystem getElevatorApi() {
+        return elevatorApi;
     }
 }
