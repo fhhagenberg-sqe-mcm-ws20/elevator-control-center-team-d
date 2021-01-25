@@ -1,10 +1,9 @@
 package sqelevator;
 
+import at.fhhagenberg.elevatorsys.App;
 import at.fhhagenberg.elevatorsys.ControlCenter;
-import at.fhhagenberg.elevatorsys.view.ControlCenterUI;
 import at.fhhagenberg.elevatorsys.view.FloorPane;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import sqelevator.factory.MockFactory;
 
 import java.rmi.RemoteException;
 
@@ -22,18 +22,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(ApplicationExtension.class)
 class GUIApplicationTest {
 
-    private IElevator elevatorAPI;
+    private IElevatorSystem elevatorAPI;
     private ControlCenter controlCenter;
 
     @Start
     public void start(Stage stage) {
-        elevatorAPI = new ElevatorMock();
-        controlCenter = new ControlCenter(elevatorAPI);
-        ControlCenterUI controlCenterUI = new ControlCenterUI(controlCenter);
-        var scene = new Scene(controlCenterUI, 500, 700);
-        stage.setScene(scene);
-        stage.setTitle("Elevator Control Center");
-        stage.show();
+        App app = new App(new MockFactory());
+        app.start(stage);
+        elevatorAPI = app.getElevatorApi();
+        controlCenter = app.getControlCenter();
     }
 
     /**
