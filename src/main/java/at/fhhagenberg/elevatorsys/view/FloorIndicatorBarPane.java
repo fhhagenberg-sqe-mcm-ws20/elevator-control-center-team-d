@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FloorIndicatorBarPane extends VBox {
-    //TODO: are floors just identified by index
     List<FloorIndicatorPane> floorIndicators = new ArrayList<FloorIndicatorPane>();
     public FloorIndicatorBarPane(int floorCount) {
         this.setHeight((double)floorCount*50);

@@ -3,7 +3,7 @@ package at.fhhagenberg.elevatorsys;
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
-import at.fhhagenberg.sqe.IElevator;
+import sqelevator.IElevator;
 import at.fhhagenberg.elevatorsys.view.FloorPane;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -55,8 +55,8 @@ public class ControlCenter implements EventHandler<MouseEvent> {
         if(tickStart != this.elevatorApi.getClockTick()){
             return false;
         }
-        notifyListeners(this.buildingModel, buildingModelNew);
         buildingModel.update(buildingModelNew);
+        notifyListeners(this.buildingModel, buildingModelNew);
         return true;
     }
 
@@ -122,21 +122,24 @@ public class ControlCenter implements EventHandler<MouseEvent> {
     }
 
     private void setAutomaticControl(int elevatorNumber, boolean automatic) {
-        System.out.println("Elevator " + elevatorNumber + " automatic controlled enabled: " + automatic);
         buildingModel.setAutomaticControl(elevatorNumber, automatic);
     }
 
-    private void setElevatorTarget(int elevatorNumber, int targetFloor) {
-        //TODO: use api call
-        System.out.println("Target floor:" + targetFloor + " for elevator " + elevatorNumber);
-//        elevatorApi.setTarget(elevatorNumber, targetFloor);
+    private void setElevatorTarget(int elevatorNumber, int targetFloor) throws RemoteException {
+        if (!buildingModel.getElevator(elevatorNumber).isAutomaticControlActivated()) {
+            elevatorApi.setTarget(elevatorNumber, targetFloor);
+        }
     }
 
     @Override
     public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getSource() instanceof FloorPane) {
             FloorPane floorPane = (FloorPane) mouseEvent.getSource();
-            setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
+            try {
+                setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
+            } catch (RemoteException e) {
+                System.out.print(e.getLocalizedMessage());
+            }
         } else {
             Button button = (Button) mouseEvent.getSource();
             boolean automatic = button.getText().equalsIgnoreCase("AUTOMATIC"); //  ¯\_(ツ)_/¯ it just works!

@@ -1,8 +1,9 @@
-package at.fhhagenberg.elevatorsys;
+package at.fhhagenberg.elevatorsys.controlcenter;
 
+import at.fhhagenberg.elevatorsys.ControlCenter;
 import at.fhhagenberg.elevatorsys.models.CommittedDirection;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
-import at.fhhagenberg.sqe.IElevator;
+import sqelevator.IElevator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

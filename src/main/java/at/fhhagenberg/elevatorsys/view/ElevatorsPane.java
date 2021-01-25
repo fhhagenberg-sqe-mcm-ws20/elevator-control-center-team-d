@@ -13,15 +13,14 @@ public class ElevatorsPane extends HBox {
 
     ElevatorPane[] elevators;
     private final int numberOfElevators;
-    private final int numberOfFloors;
 
     public ElevatorsPane(int numberOfElevators, int numberOfFloors, EventHandler<MouseEvent> eventHandler) {
         this.numberOfElevators = numberOfElevators;
-        this.numberOfFloors = numberOfFloors;
         elevators = new ElevatorPane[numberOfElevators];
 
         for (int i = 0; i < numberOfElevators; i++) {
             elevators[i] = new ElevatorPane(i, numberOfFloors, eventHandler);
+            elevators[i].setId("elevator" + i);
         }
         this.getChildren().addAll(elevators);
     }

@@ -38,6 +38,7 @@ public class FloorPane extends HBox {
         lightCircle = new Circle();
         lightCircle.setRadius(5f);
         lightCircle.setFill(Color.BLACK);
+        lightCircle.setId("targetLight");
         HBox underlineBox = new HBox(bufferRect, lightCircle);
         underlineBox.setAlignment(Pos.CENTER_LEFT);
         underlineBox.setPrefWidth(80);

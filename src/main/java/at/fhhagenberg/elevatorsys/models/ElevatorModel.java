@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ElevatorModel {
 
+    private final int elevatorNumber;
     private CommittedDirection directionStatus;
     private DoorStatus doorStatus;
     private int currentAcceleration;
@@ -14,13 +15,16 @@ public class ElevatorModel {
     private int currentSpeed;
     private int currentWeight;
     private int currentFloorTarget;
-    private boolean automaticControlActivated = true;
+    private boolean automaticControlActivated = false;
     private List<Integer> servicedFloors;
     private List<Integer> selectedFloors;
+    private Mode mode;
 
-    public ElevatorModel(CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
+
+    public ElevatorModel(int elevatorNumber, CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
                          int currentFloorTarget, List<Integer> servicedFloors) {
+        this.elevatorNumber = elevatorNumber;
         this.directionStatus = directionStatus;
         this.doorStatus = doorStatus;
         this.currentAcceleration = currentAcceleration;
@@ -157,9 +161,22 @@ public class ElevatorModel {
         }
     }
 
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
+
+    public int getElevatorNumber() {
+        return elevatorNumber;
+    }
+
 
     public static class ElevatorModelBuilder{
 
+        private int elevatorNumber;
         private CommittedDirection directionStatus;
         private DoorStatus doorStatus;
         private int currentAcceleration;
@@ -170,6 +187,10 @@ public class ElevatorModel {
         private int currentWeight;
         private int currentFloorTarget;
         private List<Integer> servicedFloors = new ArrayList<>();
+
+        public void setElevatorNumber(int elevatorNumber){
+            this.elevatorNumber = elevatorNumber;
+        }
 
         public void setDirectionStatus(int directionStatus) {
             this.directionStatus = CommittedDirection.values()[directionStatus];
@@ -216,7 +237,7 @@ public class ElevatorModel {
         }
 
         public ElevatorModel build() {
-            return new ElevatorModel(directionStatus, doorStatus, currentAcceleration, capacity, currentFloor,
+            return new ElevatorModel(elevatorNumber, directionStatus, doorStatus, currentAcceleration, capacity, currentFloor,
                     currentPosition, currentSpeed, currentWeight, currentFloorTarget, servicedFloors);
         }
     }

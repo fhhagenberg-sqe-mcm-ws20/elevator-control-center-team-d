@@ -1,12 +1,36 @@
 package at.fhhagenberg.elevatorsys.models;
 
-import static at.fhhagenberg.sqe.IElevator.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import static sqelevator.IElevator.*;
 
 public enum DoorStatus {
-    OPEN,
-    CLOSED,
-    OPENING,
-    CLOSING;
+    OPEN(1),
+    CLOSED(2),
+    OPENING(3),
+    CLOSING(4);
+
+    private final int value;
+    private static final Map map = new HashMap<>();
+
+    DoorStatus(int value) {
+        this.value = value;
+    }
+
+    static {
+        for (DoorStatus doorStatus : DoorStatus.values()) {
+            map.put(doorStatus.value, doorStatus);
+        }
+    }
+
+    public static DoorStatus valueOf(int doorStatus) {
+        return (DoorStatus) map.get(doorStatus);
+    }
+
+    public int getValue() {
+        return value;
+    }
 
     public static DoorStatus fromInt(int value) {
         switch (value) {
