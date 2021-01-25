@@ -3,7 +3,7 @@ package at.fhhagenberg.elevatorsys.models;
 import java.util.HashMap;
 import java.util.Map;
 
-import static at.fhhagenberg.sqe.IElevator.*;
+import static sqelevator.IElevator.*;
 
 public enum DoorStatus {
     OPEN(1),

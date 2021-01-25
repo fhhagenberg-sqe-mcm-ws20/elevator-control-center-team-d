@@ -2,8 +2,8 @@ package at.fhhagenberg.elevatorsys;
 
 import at.fhhagenberg.elevatorsys.view.ControlCenterUI;
 import at.fhhagenberg.elevatorsys.view.ElevatorsPane;
-import at.fhhagenberg.sqe.ElevatorMock;
-import at.fhhagenberg.sqe.IElevator;
+import sqelevator.ElevatorMock;
+import sqelevator.IElevator;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

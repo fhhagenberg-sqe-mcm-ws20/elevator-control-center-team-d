@@ -3,7 +3,7 @@ package at.fhhagenberg.elevatorsys;
 import at.fhhagenberg.elevatorsys.models.BuildingModel;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.FloorModel;
-import at.fhhagenberg.sqe.IElevator;
+import sqelevator.IElevator;
 import at.fhhagenberg.elevatorsys.view.FloorPane;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

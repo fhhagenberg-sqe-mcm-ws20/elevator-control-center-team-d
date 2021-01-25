@@ -1,4 +1,4 @@
-package at.fhhagenberg.sqe;
+package sqelevator;
 //package sqelevator;
 
 /**
