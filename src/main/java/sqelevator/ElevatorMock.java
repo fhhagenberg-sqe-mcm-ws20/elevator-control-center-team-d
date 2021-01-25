@@ -165,7 +165,8 @@ public class ElevatorMock implements IElevator {
         servicedFloors.add(10);
         servicedFloors.add(11);
 
-        ElevatorModel elevator0 = new ElevatorModel(CommittedDirection.UNCOMMITTED,
+        ElevatorModel elevator0 = new ElevatorModel(0,
+                CommittedDirection.UNCOMMITTED,
                 DoorStatus.CLOSED,
                 0,
                 100,
@@ -176,7 +177,8 @@ public class ElevatorMock implements IElevator {
                 0,
                 servicedFloors);
 
-        ElevatorModel elevator1 = new ElevatorModel(CommittedDirection.UNCOMMITTED,
+        ElevatorModel elevator1 = new ElevatorModel(1,
+                CommittedDirection.UNCOMMITTED,
                 DoorStatus.CLOSED,
                 0,
                 100,
@@ -187,7 +189,8 @@ public class ElevatorMock implements IElevator {
                 0,
                 servicedFloors);
 
-        ElevatorModel elevator2 = new ElevatorModel(CommittedDirection.UNCOMMITTED,
+        ElevatorModel elevator2 = new ElevatorModel(2,
+                CommittedDirection.UNCOMMITTED,
                 DoorStatus.CLOSED,
                 0,
                 100,
