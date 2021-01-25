@@ -1,4 +1,4 @@
-package at.fhhagenberg.sqe;
+package sqelevator;
 
 import at.fhhagenberg.elevatorsys.models.*;
 
