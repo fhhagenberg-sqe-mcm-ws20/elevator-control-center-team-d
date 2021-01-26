@@ -235,6 +235,7 @@ public class RmiElevatorAdapter implements IElevatorSystem {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     System.out.println(e.getLocalizedMessage());
+                    Thread.currentThread().interrupt();
                 }
             }
         };

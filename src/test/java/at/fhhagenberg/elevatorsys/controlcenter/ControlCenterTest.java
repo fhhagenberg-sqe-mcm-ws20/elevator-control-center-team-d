@@ -1,8 +1,7 @@
 package at.fhhagenberg.elevatorsys.controlcenter;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
-import at.fhhagenberg.elevatorsys.models.CommittedDirection;
-import at.fhhagenberg.elevatorsys.models.FloorModel;
+import at.fhhagenberg.elevatorsys.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -145,5 +144,18 @@ class ControlCenterTest {
         assertEquals(CommittedDirection.UNCOMMITTED, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
     }
 
+    @Test
+    void t_mode() {
+        //GIVEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
 
+        //WHEN
+        controlCenter.setControlMode(0, Mode.MANUAL);
+        controlCenter.setControlMode(1, Mode.AUTOMATIC);
+
+        //THEN
+        ModeManager modeManager = controlCenter.getModeManager();
+        assertEquals(Mode.MANUAL, modeManager.getModeForElevator(0));
+        assertEquals(Mode.AUTOMATIC, modeManager.getModeForElevator(1));
+    }
 }

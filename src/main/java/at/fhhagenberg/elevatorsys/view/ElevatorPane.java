@@ -6,27 +6,20 @@ import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.Mode;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
-import javax.swing.*;
-
 
 public class ElevatorPane extends VBox {
 
     private final ElevatorFloorPane elevatorFloorPane;
     private final Label payloadLabel;
     private final Label speedLabel;
-    
-    private int elevatorNumber;
+    private final int elevatorNumber;
 
     public ElevatorPane(int elevatorNumber, int numberOfFloors, EventHandler eventHandler) {
-        assert numberOfFloors > 0;
         this.elevatorNumber = elevatorNumber;
         elevatorFloorPane = new ElevatorFloorPane(elevatorNumber, numberOfFloors, eventHandler);
 
@@ -58,14 +51,6 @@ public class ElevatorPane extends VBox {
         setLightTarget(elevatorModel.getCurrentFloorTarget());
     }
 
-    public void setElevatorDirection(CommittedDirection direction){
-        elevatorFloorPane.setElevatorDirection(direction);
-    }
-
-    public void setElevatorDoorStatus(DoorStatus doorStatus){
-        elevatorFloorPane.setElevatorDoorStatus(doorStatus);
-    }
-
     public void setLightSelected(int floor) {
         elevatorFloorPane.setFloorLight(floor, Color.ORANGE);
     }
@@ -76,14 +61,6 @@ public class ElevatorPane extends VBox {
 
     public void setFloor(int floor) {
         elevatorFloorPane.setFloor(floor);
-    }
-
-    public void unsetLight(int floor) {
-        elevatorFloorPane.unsetFloorLight(floor);
-    }
-
-    public void unsetFloor(int floor) {
-        elevatorFloorPane.unsetFloor(floor);
     }
 
     public void unsetAllLights() { elevatorFloorPane.unsetAllFloorLight();}

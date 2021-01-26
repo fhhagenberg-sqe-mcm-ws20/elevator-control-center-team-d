@@ -16,7 +16,7 @@ public class ElevatorModel {
     private int currentWeight;
     private int currentFloorTarget;
     private List<Integer> servicedFloors;
-    private List<Integer> selectedFloors;
+    private final List<Integer> selectedFloors;
 
     public ElevatorModel(int elevatorNumber, CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
@@ -129,10 +129,6 @@ public class ElevatorModel {
         return selectedFloors;
     }
 
-    public void setSelectedFloors(List<Integer> selectedFloors) {
-        this.selectedFloors = selectedFloors;
-    }
-
     public void selectFloor(Integer floor) {
         if (!selectedFloors.contains(floor)) {
             selectedFloors.add(floor);
@@ -167,7 +163,7 @@ public class ElevatorModel {
         private int currentSpeed;
         private int currentWeight;
         private int currentFloorTarget;
-        private List<Integer> servicedFloors = new ArrayList<>();
+        private final List<Integer> servicedFloors = new ArrayList<>();
 
         public void setElevatorNumber(int elevatorNumber){
             this.elevatorNumber = elevatorNumber;
@@ -211,10 +207,6 @@ public class ElevatorModel {
 
         public void addServicedFloor(int floor) {
             servicedFloors.add(floor);
-        }
-
-        public void setServicedFloors(List<Integer> servicedFloors) {
-            this.servicedFloors = servicedFloors;
         }
 
         public ElevatorModel build() {

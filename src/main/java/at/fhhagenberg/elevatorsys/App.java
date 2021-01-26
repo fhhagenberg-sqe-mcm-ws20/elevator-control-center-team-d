@@ -44,6 +44,7 @@ public class App extends Application  {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     System.out.println(e.getLocalizedMessage());
+                    Thread.currentThread().interrupt();
                 }
             }
         };
