@@ -43,7 +43,6 @@ class RmiElevatorAdapterTest {
         when(mockApi.getFloorNum()).thenReturn(8);
         when(mockApi.getTarget(0)).thenReturn(2);
         when(mockApi.getClockTick()).thenReturn(12345L);
-
         registry = LocateRegistry.createRegistry(1100);
         registry.bind("RmiConnectionTest", mockApi);
 
@@ -69,32 +68,10 @@ class RmiElevatorAdapterTest {
     }
 
     @Test
-    void t_rmiGetterConnection() {
+    void t_rmiGetterConnection() throws RemoteException {
         await().atMost(300, TimeUnit.MILLISECONDS).until(() -> elevatorApi.isConnected());
+
         assertTrue(elevatorApi.isConnected());
-
-        assertEquals(0,elevatorApi.getCommittedDirection(0));
-        assertEquals(0,elevatorApi.getElevatorAccel(0));
-        assertEquals(Boolean.FALSE, elevatorApi.getElevatorButton(0,0));
-        assertEquals(0,elevatorApi.getElevatorDoorStatus(0));
-        assertEquals(0,elevatorApi.getElevatorFloor(0));
-        assertEquals(0,elevatorApi.getElevatorNum());
-        assertEquals(0,elevatorApi.getElevatorPosition(0));
-        assertEquals(0,elevatorApi.getElevatorSpeed(0));
-        assertEquals(0,elevatorApi.getElevatorWeight(0));
-        assertEquals(0,elevatorApi.getElevatorCapacity(0));
-        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonDown(0));
-        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonUp(0));
-        assertEquals(0, elevatorApi.getFloorHeight());
-        assertEquals(0, elevatorApi.getFloorNum());
-        assertEquals(0, elevatorApi.getTarget(0));
-        assertEquals(0L, elevatorApi.getClockTick());
-    }
-
-    @Test
-    void t_rmiGetterConnectionFailed() throws RemoteException, NotBoundException {
-        registry.unbind("RmiConnectionTest");
-
         assertEquals(1,elevatorApi.getCommittedDirection(0));
         assertEquals(100,elevatorApi.getElevatorAccel(0));
         assertEquals(Boolean.TRUE, elevatorApi.getElevatorButton(0,0));
@@ -113,4 +90,49 @@ class RmiElevatorAdapterTest {
         assertEquals(12345L, elevatorApi.getClockTick());
     }
 
+    @Test
+    void t_rmiGetterConnectionFailed() throws RemoteException, AlreadyBoundException {
+        RmiElevatorAdapter elevatorApi;
+        IElevator mockApi_f = mock(IElevator.class, Mockito.withSettings().serializable());
+
+        when(mockApi.getCommittedDirection(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorAccel(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorButton(0, 0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorDoorStatus(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorFloor(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorNum()).thenThrow(new RemoteException());
+        when(mockApi.getElevatorPosition(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorSpeed(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorWeight(0)).thenThrow(new RemoteException());
+        when(mockApi.getElevatorCapacity(0)).thenThrow(new RemoteException());
+        when(mockApi.getFloorButtonDown(0)).thenThrow(new RemoteException());
+        when(mockApi.getFloorButtonUp(0)).thenThrow(new RemoteException());
+        when(mockApi.getFloorHeight()).thenThrow(new RemoteException());
+        when(mockApi.getFloorNum()).thenThrow(new RemoteException());
+        when(mockApi.getTarget(0)).thenThrow(new RemoteException());
+        when(mockApi.getClockTick()).thenThrow(new RemoteException());
+
+        Registry registry_f = LocateRegistry.createRegistry(1101);
+        registry_f.bind("RmiConnectionTest", mockApi_f);
+        elevatorApi = new RmiElevatorAdapter("rmi://localhost:1101/RmiConnectionTest");
+        assertTrue(elevatorApi.isConnected());
+
+        assertTrue(elevatorApi.isConnected());
+        assertEquals(0,elevatorApi.getCommittedDirection(0));
+        assertEquals(0,elevatorApi.getElevatorAccel(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getElevatorButton(0,0));
+        assertEquals(0,elevatorApi.getElevatorDoorStatus(0));
+        assertEquals(0,elevatorApi.getElevatorFloor(0));
+        assertEquals(0,elevatorApi.getElevatorNum());
+        assertEquals(0,elevatorApi.getElevatorPosition(0));
+        assertEquals(0,elevatorApi.getElevatorSpeed(0));
+        assertEquals(0,elevatorApi.getElevatorWeight(0));
+        assertEquals(0,elevatorApi.getElevatorCapacity(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonDown(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonUp(0));
+        assertEquals(0, elevatorApi.getFloorHeight());
+        assertEquals(0, elevatorApi.getFloorNum());
+        assertEquals(0, elevatorApi.getTarget(0));
+        assertEquals(0L, elevatorApi.getClockTick());
+    }
 }
