@@ -1,5 +1,5 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fhhagenberg-sqe-mcm-ws20_elevator-control-center-team-d&metric=alert_status)](https://sonarcloud.io/dashboard?id=fhhagenberg-sqe-mcm-ws20_elevator-control-center-team-d)
-![CI Status](https://github.com/fhhagenberg-sqe-mcm-ws20/elevator-control-center-team-d/blob/develop/.github/workflows/maven.yml/badge.svg)
+![CI Status](https://github.com/fhhagenberg-sqe-mcm-ws20/elevator-control-center-team-d/workflows/maven.yml/badge.svg)
 # Graphical User Interface with JavaFx
 
 ### Prerequisites
