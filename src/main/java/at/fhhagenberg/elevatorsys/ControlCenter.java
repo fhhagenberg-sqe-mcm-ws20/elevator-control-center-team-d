@@ -16,8 +16,8 @@ import java.util.List;
 public class ControlCenter implements EventHandler {
 
     private final BuildingModel buildingModel;
-    private IElevatorSystem elevatorApi;
-    private ModeManager modeManager;
+    private final IElevatorSystem elevatorApi;
+    private final ModeManager modeManager;
 
     private final List<PropertyChangeListener> listener = new ArrayList<>();
 
@@ -26,11 +26,6 @@ public class ControlCenter implements EventHandler {
         this.elevatorApi = elevatorApi;
         this.modeManager = new ModeManager(elevatorApi);
         buildingModel = queryBuilding();
-    }
-
-    //To be able to inject a Dummy BuildingModel for testing
-    public ControlCenter(BuildingModel buildingModel){
-        this.buildingModel = buildingModel;
     }
 
     public void addChangeListener(PropertyChangeListener newListener) {
@@ -119,8 +114,12 @@ public class ControlCenter implements EventHandler {
         return buildingModel.getElevators().size();
     }
 
-    private void setControlMode(int elevatorNumber, Mode mode) {
+    public void setControlMode(int elevatorNumber, Mode mode) {
         modeManager.setModeForElevator(mode, elevatorNumber);
+    }
+
+    public ModeManager getModeManager() {
+        return modeManager;
     }
 
     private void setElevatorTarget(int elevatorNumber, int targetFloor) {
