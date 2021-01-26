@@ -1,12 +1,13 @@
 package at.fhhagenberg.elevatorsys.models;
 
 import sqelevator.IElevator;
+import sqelevator.IElevatorSystem;
 
 import java.rmi.RemoteException;
 
 public class ManualMode extends ModeBase {
-    public ManualMode(IElevator elevatorApi) {
-        super(elevatorApi);
+    public ManualMode(IElevatorSystem elevatorSystem) {
+        super(elevatorSystem);
     }
 
     @Override
@@ -19,6 +20,6 @@ public class ManualMode extends ModeBase {
             direction = CommittedDirection.DOWN;
         }
 
-        elevatorApi.setCommittedDirection(elevator.getElevatorNumber(), direction.getValue());
+        elevatorSystem.setCommittedDirection(elevator.getElevatorNumber(), direction.getValue());
     }
 }

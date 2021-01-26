@@ -1,14 +1,15 @@
 package at.fhhagenberg.elevatorsys.models;
 
 import sqelevator.IElevator;
+import sqelevator.IElevatorSystem;
 
 import java.rmi.RemoteException;
 
 public abstract class ModeBase {
-    IElevator elevatorApi;
+    IElevatorSystem elevatorSystem;
 
-    public ModeBase(IElevator elevatorApi) {
-        this.elevatorApi = elevatorApi;
+    public ModeBase(IElevatorSystem elevatorSystem) {
+        this.elevatorSystem = elevatorSystem;
     }
 
     public abstract void execute(ElevatorModel elevator) throws RemoteException;

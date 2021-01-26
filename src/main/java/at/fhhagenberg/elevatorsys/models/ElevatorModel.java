@@ -15,11 +15,10 @@ public class ElevatorModel {
     private int currentSpeed;
     private int currentWeight;
     private int currentFloorTarget;
-    private boolean automaticControlActivated = false;
+    private Mode controlMode = Mode.AUTOMATIC;
     private List<Integer> servicedFloors;
     private List<Integer> selectedFloors;
     private Mode mode;
-
 
     public ElevatorModel(int elevatorNumber, CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
@@ -36,6 +35,7 @@ public class ElevatorModel {
         this.currentFloorTarget = currentFloorTarget;
         this.servicedFloors = servicedFloors;
         this.selectedFloors = new ArrayList<>();
+        this.mode = Mode.AUTOMATIC;
     }
 
     public CommittedDirection getDirectionStatus() {
@@ -146,12 +146,12 @@ public class ElevatorModel {
         selectedFloors.remove(floor);
     }
 
-    public boolean isAutomaticControlActivated() {
-        return automaticControlActivated;
+    public Mode getControlMode() {
+        return controlMode;
     }
 
-    public void setAutomaticControl(boolean automaticControlActivated) {
-        this.automaticControlActivated = automaticControlActivated;
+    public void setControlMode(Mode controlMode) {
+        this.controlMode = controlMode;
     }
 
     public void shouldServeFloor(int floor, boolean serve) {
