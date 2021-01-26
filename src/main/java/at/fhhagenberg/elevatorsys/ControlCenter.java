@@ -59,6 +59,7 @@ public class ControlCenter implements EventHandler {
         }
         buildingModel.update(buildingModelNew);
         notifyListeners(this.buildingModel, buildingModelNew);
+        modeManager.execute(buildingModelNew);
         return true;
     }
 
@@ -124,11 +125,11 @@ public class ControlCenter implements EventHandler {
     }
 
     private void setControlMode(int elevatorNumber, Mode mode) {
-        buildingModel.setControlMode(elevatorNumber, mode);
+        modeManager.setModeForElevator(mode, elevatorNumber);
     }
 
     private void setElevatorTarget(int elevatorNumber, int targetFloor) throws RemoteException {
-        if (buildingModel.getElevator(elevatorNumber).getControlMode() == Mode.MANUAL) {
+        if (modeManager.getModeForElevator(elevatorNumber) == Mode.MANUAL) {
             elevatorApi.setTarget(elevatorNumber, targetFloor);
         }
     }

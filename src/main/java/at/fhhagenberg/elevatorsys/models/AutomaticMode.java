@@ -1,6 +1,5 @@
 package at.fhhagenberg.elevatorsys.models;
 
-import sqelevator.IElevator;
 import sqelevator.IElevatorSystem;
 
 public class AutomaticMode extends ModeBase {

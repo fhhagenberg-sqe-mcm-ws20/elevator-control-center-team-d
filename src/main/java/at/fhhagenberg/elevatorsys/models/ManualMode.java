@@ -1,6 +1,5 @@
 package at.fhhagenberg.elevatorsys.models;
 
-import sqelevator.IElevator;
 import sqelevator.IElevatorSystem;
 
 import java.rmi.RemoteException;
@@ -19,7 +18,6 @@ public class ManualMode extends ModeBase {
         else if (elevator.getCurrentFloorTarget() > elevator.getCurrentFloorTarget()){
             direction = CommittedDirection.DOWN;
         }
-
         elevatorSystem.setCommittedDirection(elevator.getElevatorNumber(), direction.getValue());
     }
 }
