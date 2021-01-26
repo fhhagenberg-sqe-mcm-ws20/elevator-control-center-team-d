@@ -35,7 +35,7 @@ public class ElevatorPane extends VBox {
         ToggleGroup modeButtons = new ToggleGroup();
         manualButton.setToggleGroup(modeButtons);
         autoButton.setToggleGroup(modeButtons);
-        modeButtons.selectToggle(autoButton);
+        modeButtons.selectToggle(manualButton);
         modeButtons.selectedToggleProperty().addListener((observable, oldVal, newVal) -> eventHandler.handle(new ModeChangeEvent(elevatorNumber, Mode.valueOf(((RadioButton)newVal).getText()))));
 
         payloadLabel = new Label("payload: ");

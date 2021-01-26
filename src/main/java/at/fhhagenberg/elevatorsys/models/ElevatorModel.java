@@ -35,7 +35,7 @@ public class ElevatorModel {
         this.currentFloorTarget = currentFloorTarget;
         this.servicedFloors = servicedFloors;
         this.selectedFloors = new ArrayList<>();
-        this.mode = Mode.AUTOMATIC;
+        this.mode = Mode.MANUAL;
     }
 
     public CommittedDirection getDirectionStatus() {
