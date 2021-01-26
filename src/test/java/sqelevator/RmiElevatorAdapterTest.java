@@ -95,27 +95,26 @@ class RmiElevatorAdapterTest {
         RmiElevatorAdapter elevatorApi;
         IElevator mockApi_f = mock(IElevator.class, Mockito.withSettings().serializable());
 
-        when(mockApi.getCommittedDirection(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorAccel(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorButton(0, 0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorDoorStatus(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorFloor(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorNum()).thenThrow(new RemoteException());
-        when(mockApi.getElevatorPosition(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorSpeed(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorWeight(0)).thenThrow(new RemoteException());
-        when(mockApi.getElevatorCapacity(0)).thenThrow(new RemoteException());
-        when(mockApi.getFloorButtonDown(0)).thenThrow(new RemoteException());
-        when(mockApi.getFloorButtonUp(0)).thenThrow(new RemoteException());
-        when(mockApi.getFloorHeight()).thenThrow(new RemoteException());
-        when(mockApi.getFloorNum()).thenThrow(new RemoteException());
-        when(mockApi.getTarget(0)).thenThrow(new RemoteException());
-        when(mockApi.getClockTick()).thenThrow(new RemoteException());
+        when(mockApi_f.getCommittedDirection(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorAccel(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorButton(0, 0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorDoorStatus(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorFloor(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorNum()).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorPosition(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorSpeed(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorWeight(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getElevatorCapacity(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getFloorButtonDown(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getFloorButtonUp(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getFloorHeight()).thenThrow(new RemoteException());
+        when(mockApi_f.getFloorNum()).thenThrow(new RemoteException());
+        when(mockApi_f.getTarget(0)).thenThrow(new RemoteException());
+        when(mockApi_f.getClockTick()).thenThrow(new RemoteException());
 
         Registry registry_f = LocateRegistry.createRegistry(1101);
         registry_f.bind("RmiConnectionTest", mockApi_f);
         elevatorApi = new RmiElevatorAdapter("rmi://localhost:1101/RmiConnectionTest");
-        assertTrue(elevatorApi.isConnected());
 
         assertTrue(elevatorApi.isConnected());
         assertEquals(0,elevatorApi.getCommittedDirection(0));
