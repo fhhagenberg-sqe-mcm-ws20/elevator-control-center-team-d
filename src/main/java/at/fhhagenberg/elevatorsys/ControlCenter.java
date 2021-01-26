@@ -21,7 +21,6 @@ public class ControlCenter implements EventHandler {
 
     private final List<PropertyChangeListener> listener = new ArrayList<>();
 
-
     public ControlCenter(IElevatorSystem elevatorApi) {
         this.elevatorApi = elevatorApi;
         this.modeManager = new ModeManager(elevatorApi);
@@ -40,12 +39,14 @@ public class ControlCenter implements EventHandler {
 
    //In Addition check if the clock tick is the same as from the earlier polling so we can skip the data if its the same since data didnt change.
     public boolean updateBuilding(){
+        System.out.println("update building called");
         long tickStart = this.elevatorApi.getClockTick();
         BuildingModel buildingModelNew = queryBuilding();
 
         if(tickStart != this.elevatorApi.getClockTick()){
             return false;
         }
+
         buildingModel.update(buildingModelNew);
         notifyListeners(this.buildingModel, buildingModelNew);
         modeManager.execute(buildingModelNew);
@@ -126,6 +127,10 @@ public class ControlCenter implements EventHandler {
         if (modeManager.getModeForElevator(elevatorNumber) == Mode.MANUAL) {
             elevatorApi.setTarget(elevatorNumber, targetFloor);
         }
+    }
+
+    public boolean getConnectionStatus(){
+         return elevatorApi.isConnected();
     }
 
     @Override
