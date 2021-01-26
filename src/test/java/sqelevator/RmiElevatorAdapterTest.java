@@ -73,6 +73,28 @@ class RmiElevatorAdapterTest {
         await().atMost(300, TimeUnit.MILLISECONDS).until(() -> elevatorApi.isConnected());
         assertTrue(elevatorApi.isConnected());
 
+        assertEquals(0,elevatorApi.getCommittedDirection(0));
+        assertEquals(0,elevatorApi.getElevatorAccel(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getElevatorButton(0,0));
+        assertEquals(0,elevatorApi.getElevatorDoorStatus(0));
+        assertEquals(0,elevatorApi.getElevatorFloor(0));
+        assertEquals(0,elevatorApi.getElevatorNum());
+        assertEquals(0,elevatorApi.getElevatorPosition(0));
+        assertEquals(0,elevatorApi.getElevatorSpeed(0));
+        assertEquals(0,elevatorApi.getElevatorWeight(0));
+        assertEquals(0,elevatorApi.getElevatorCapacity(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonDown(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonUp(0));
+        assertEquals(0, elevatorApi.getFloorHeight());
+        assertEquals(0, elevatorApi.getFloorNum());
+        assertEquals(0, elevatorApi.getTarget(0));
+        assertEquals(0L, elevatorApi.getClockTick());
+    }
+
+    @Test
+    void t_rmiGetterConnectionFailed() throws RemoteException, NotBoundException {
+        registry.unbind("RmiConnectionTest");
+
         assertEquals(1,elevatorApi.getCommittedDirection(0));
         assertEquals(100,elevatorApi.getElevatorAccel(0));
         assertEquals(Boolean.TRUE, elevatorApi.getElevatorButton(0,0));
