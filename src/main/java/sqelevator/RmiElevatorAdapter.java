@@ -15,7 +15,7 @@ public class RmiElevatorAdapter implements IElevatorSystem {
             elevatorApi = (IElevator) Naming.lookup(lookupName);
             connected = true;
         } catch (Exception e) {
-            reconnect();
+            connected = false;
         }
     }
 
@@ -222,16 +222,14 @@ public class RmiElevatorAdapter implements IElevatorSystem {
     }
 
     public void reconnect() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                while (Boolean.FALSE.equals(connected)) {
-                    connect();
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        connected = false;
+        Runnable runnable = () -> {
+            while (!connected) {
+                connect();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getLocalizedMessage());
                 }
             }
         };
