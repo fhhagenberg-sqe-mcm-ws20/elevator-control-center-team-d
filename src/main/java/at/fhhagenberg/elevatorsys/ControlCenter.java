@@ -10,7 +10,6 @@ import sqelevator.IElevatorSystem;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +25,7 @@ public class ControlCenter implements EventHandler {
     public ControlCenter(IElevatorSystem elevatorApi) {
         this.elevatorApi = elevatorApi;
         this.modeManager = new ModeManager(elevatorApi);
-        try {
-            //TODO: change to updateBuilding? but what if it fails because of a changed tick? stays uninitialized
-            buildingModel = queryBuilding();
-        } catch (RemoteException e) {
-            System.out.print(e.getLocalizedMessage());
-        }
+        buildingModel = queryBuilding();
     }
 
     //To be able to inject a Dummy BuildingModel for testing
@@ -50,7 +44,7 @@ public class ControlCenter implements EventHandler {
     }
 
    //In Addition check if the clock tick is the same as from the earlier polling so we can skip the data if its the same since data didnt change.
-    public boolean updateBuilding() throws RemoteException {
+    public boolean updateBuilding(){
         long tickStart = this.elevatorApi.getClockTick();
         BuildingModel buildingModelNew = queryBuilding();
 
@@ -63,7 +57,7 @@ public class ControlCenter implements EventHandler {
         return true;
     }
 
-    private BuildingModel queryBuilding() throws RemoteException {
+    private BuildingModel queryBuilding() {
         final int elevatorNum = this.elevatorApi.getElevatorNum();
         final int floorNum = this.elevatorApi.getFloorNum();
         List<ElevatorModel> elevatorModels = new ArrayList<>();
@@ -80,7 +74,7 @@ public class ControlCenter implements EventHandler {
         return new BuildingModel(elevatorModels, floorModels);
     }
 
-    private ElevatorModel queryElevator(int elevatorNumber) throws RemoteException {
+    private ElevatorModel queryElevator(int elevatorNumber) {
         final int floorNum = this.elevatorApi.getFloorNum();
 
         ElevatorModel.ElevatorModelBuilder builder = new ElevatorModel.ElevatorModelBuilder();
@@ -104,7 +98,7 @@ public class ControlCenter implements EventHandler {
         return builder.build();
     }
 
-    private FloorModel queryFloor(int floorNumber) throws RemoteException {
+    private FloorModel queryFloor(int floorNumber) {
         boolean buttonUpState = elevatorApi.getFloorButtonUp(floorNumber);
         boolean buttonDownState = elevatorApi.getFloorButtonDown(floorNumber);
         int floorHeight = elevatorApi.getFloorHeight();
@@ -128,7 +122,7 @@ public class ControlCenter implements EventHandler {
         modeManager.setModeForElevator(mode, elevatorNumber);
     }
 
-    private void setElevatorTarget(int elevatorNumber, int targetFloor) throws RemoteException {
+    private void setElevatorTarget(int elevatorNumber, int targetFloor) {
         if (modeManager.getModeForElevator(elevatorNumber) == Mode.MANUAL) {
             elevatorApi.setTarget(elevatorNumber, targetFloor);
         }
@@ -138,11 +132,8 @@ public class ControlCenter implements EventHandler {
     public void handle(Event event) {
         if(event instanceof MouseEvent){
             FloorPane floorPane = (FloorPane) event.getSource();
-            try {
-                setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
-            } catch (RemoteException e) {
-                System.out.print(e.getLocalizedMessage());
-            }
+            setElevatorTarget(floorPane.getElevatorNumber(), floorPane.getFloorNumber());
+
         }
         else if(event instanceof  ModeChangeEvent){
             ModeChangeEvent modeChangeEvent = (ModeChangeEvent)event;

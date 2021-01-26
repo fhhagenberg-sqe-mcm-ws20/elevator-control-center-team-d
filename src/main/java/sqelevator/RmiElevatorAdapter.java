@@ -1,120 +1,243 @@
 package sqelevator;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class RmiElevatorAdapter implements IElevatorSystem {
 
     private IElevator elevatorApi;
+    private boolean connected = false;
+    private String lookupName = "rmi://localhost/ElevatorSim";
 
     @Override
     public void connect() {
         try {
-            elevatorApi = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
-        } catch (NotBoundException | MalformedURLException | RemoteException e) {
-            //TODO: throw the wanted exception
+            elevatorApi = (IElevator) Naming.lookup(lookupName);
+            connected = true;
+        } catch (Exception e) {
+            reconnect();
         }
     }
 
     @Override
-    public int getCommittedDirection(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getCommittedDirection(elevatorNumber);
+    public boolean isConnected() {
+        return connected;
     }
 
     @Override
-    public int getElevatorAccel(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorAccel(elevatorNumber);
+    public int getCommittedDirection(int elevatorNumber) {
+        try {
+            return elevatorApi.getCommittedDirection(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public boolean getElevatorButton(int elevatorNumber, int floor) throws RemoteException {
-        return elevatorApi.getElevatorButton(elevatorNumber, floor);
+    public int getElevatorAccel(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorAccel(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getElevatorDoorStatus(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorDoorStatus(elevatorNumber);
+    public boolean getElevatorButton(int elevatorNumber, int floor) {
+        try {
+            return elevatorApi.getElevatorButton(elevatorNumber, floor);
+        } catch (RemoteException e) {
+            reconnect();
+            return false;
+        }
     }
 
     @Override
-    public int getElevatorFloor(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorFloor(elevatorNumber);
+    public int getElevatorDoorStatus(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorDoorStatus(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getElevatorNum() throws RemoteException {
-        return elevatorApi.getElevatorNum();
+    public int getElevatorFloor(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorFloor(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getElevatorPosition(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorPosition(elevatorNumber);
+    public int getElevatorNum() {
+        try {
+            return elevatorApi.getElevatorNum();
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getElevatorSpeed(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorSpeed(elevatorNumber);
+    public int getElevatorPosition(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorPosition(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getElevatorWeight(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorWeight(elevatorNumber);
+    public int getElevatorSpeed(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorSpeed(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getElevatorCapacity(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getElevatorCapacity(elevatorNumber);
+    public int getElevatorWeight(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorWeight(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public boolean getFloorButtonDown(int floor) throws RemoteException {
-        return elevatorApi.getFloorButtonDown(floor);
+    public int getElevatorCapacity(int elevatorNumber) {
+        try {
+            return elevatorApi.getElevatorCapacity(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public boolean getFloorButtonUp(int floor) throws RemoteException {
-        return elevatorApi.getFloorButtonUp(floor);
+    public boolean getFloorButtonDown(int floor) {
+        try {
+            return elevatorApi.getFloorButtonDown(floor);
+        } catch (RemoteException e) {
+            reconnect();
+            return false;
+        }
     }
 
     @Override
-    public int getFloorHeight() throws RemoteException {
-        return elevatorApi.getFloorHeight();
+    public boolean getFloorButtonUp(int floor) {
+        try {
+            return elevatorApi.getFloorButtonUp(floor);
+        } catch (RemoteException e) {
+            reconnect();
+            return false;
+        }
     }
 
     @Override
-    public int getFloorNum() throws RemoteException {
-        return elevatorApi.getFloorNum();
+    public int getFloorHeight() {
+        try {
+            return elevatorApi.getFloorHeight();
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public boolean getServicesFloors(int elevatorNumber, int floor) throws RemoteException {
-        return elevatorApi.getServicesFloors(elevatorNumber, floor);
+    public int getFloorNum() {
+        try {
+            return elevatorApi.getFloorNum();
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public int getTarget(int elevatorNumber) throws RemoteException {
-        return elevatorApi.getTarget(elevatorNumber);
+    public boolean getServicesFloors(int elevatorNumber, int floor) {
+        try {
+            return elevatorApi.getServicesFloors(elevatorNumber, floor);
+        } catch (RemoteException e) {
+            reconnect();
+            return false;
+        }
     }
 
     @Override
-    public void setCommittedDirection(int elevatorNumber, int direction) throws RemoteException {
-        elevatorApi.setCommittedDirection(elevatorNumber, direction);
+    public int getTarget(int elevatorNumber) {
+        try {
+            return elevatorApi.getTarget(elevatorNumber);
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
     }
 
     @Override
-    public void setServicesFloors(int elevatorNumber, int floor, boolean service) throws RemoteException {
-        elevatorApi.setServicesFloors(elevatorNumber, floor, service);
+    public void setCommittedDirection(int elevatorNumber, int direction) {
+        try {
+            elevatorApi.setCommittedDirection(elevatorNumber, direction);
+        } catch (RemoteException e) {
+            reconnect();
+        }
     }
 
     @Override
-    public void setTarget(int elevatorNumber, int target) throws RemoteException {
-        elevatorApi.setTarget(elevatorNumber, target);
+    public void setServicesFloors(int elevatorNumber, int floor, boolean service) {
+        try {
+            elevatorApi.setServicesFloors(elevatorNumber, floor, service);
+        } catch (RemoteException e) {
+            reconnect();
+        }
     }
 
     @Override
-    public long getClockTick() throws RemoteException {
-        return elevatorApi.getClockTick();
+    public void setTarget(int elevatorNumber, int target) {
+        try {
+            elevatorApi.setTarget(elevatorNumber, target);
+        } catch (RemoteException e) {
+            reconnect();
+        }
     }
+
+    @Override
+    public long getClockTick() {
+        try {
+            return elevatorApi.getClockTick();
+        } catch (RemoteException e) {
+            reconnect();
+            return 0;
+        }
+    }
+
+    public void reconnect() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (Boolean.FALSE.equals(connected)) {
+                    connect();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
 }

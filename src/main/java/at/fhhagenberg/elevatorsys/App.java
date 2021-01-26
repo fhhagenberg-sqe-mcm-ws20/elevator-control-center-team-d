@@ -9,8 +9,6 @@ import sqelevator.IElevatorSystem;
 import sqelevator.factory.ApiFactory;
 import sqelevator.factory.RmiFactory;
 
-import java.rmi.RemoteException;
-
 /**
  * JavaFX App
  */
@@ -39,10 +37,8 @@ public class App extends Application  {
         Runnable updateRunnable = () -> {
             while(true) {
                 Platform.runLater(() -> {
-                    try {
+                    if (elevatorApi.isConnected()){
                         controlCenter.updateBuilding();
-                    } catch (RemoteException e) {
-                        System.out.println(e.getLocalizedMessage());
                     }
                 });
                 try {
@@ -52,6 +48,8 @@ public class App extends Application  {
                 }
             }
         };
+
+
 
         Thread updateThread = new Thread(updateRunnable);
         updateThread.setDaemon(true);

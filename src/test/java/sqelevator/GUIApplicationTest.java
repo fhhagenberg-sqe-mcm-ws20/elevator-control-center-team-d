@@ -14,8 +14,6 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import sqelevator.factory.MockFactory;
 
-import java.rmi.RemoteException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -33,23 +31,14 @@ class GUIApplicationTest {
         controlCenter = app.getControlCenter();
     }
 
-    /**
-     * Sets target floor in backend and checks on UI
-     * @param robot
-     * @throws RemoteException
-     */
     @Test
-    public void testSetTargetFloor(FxRobot robot) throws RemoteException {
+    public void testSetTargetFloor(FxRobot robot) {
         elevatorAPI.setTarget(0, 3);
         elevatorAPI.setTarget(1, 4);
         elevatorAPI.setTarget(2, 5);
 
         Platform.runLater(() -> {
-            try {
-                controlCenter.updateBuilding();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            controlCenter.updateBuilding();
         });
         robot.sleep(1000);
 
@@ -92,11 +81,7 @@ class GUIApplicationTest {
         fxRobot.clickOn(elevator2floor3);
 
         Platform.runLater(() -> {
-            try {
-                controlCenter.updateBuilding();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            controlCenter.updateBuilding();
         });
 
         fxRobot.sleep(500);

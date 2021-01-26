@@ -10,8 +10,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import sqelevator.IElevatorSystem;
 
-import java.rmi.RemoteException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.anyInt;
@@ -22,7 +20,7 @@ class ControlCenterTest {
     IElevatorSystem elevator;
 
     @BeforeEach
-    void beforeEach() throws RemoteException {
+    void beforeEach(){
         //GIVEN
         elevator = mock(IElevatorSystem.class);
         Mockito.when(elevator.getElevatorNum()).thenReturn(2);
@@ -56,7 +54,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_elevatorDataModel() throws RemoteException {
+    void t_elevatorDataModel() {
         //WHEN
         Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
         Mockito.when(elevator.getElevatorAccel(1)).thenReturn(1);
@@ -91,7 +89,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_floorDataModel() throws RemoteException {
+    void t_floorDataModel() {
         //WHEN
         Mockito.when(elevator.getFloorHeight()).thenReturn(20);
         Mockito.when(elevator.getFloorButtonDown(1)).thenReturn(false);
@@ -117,7 +115,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_updateTickCorrect() throws RemoteException {
+    void t_updateTickCorrect() {
         //WHEN
         ControlCenter controlCenter = new ControlCenter(elevator);
         Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
@@ -129,7 +127,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_updateTickChanged() throws RemoteException {
+    void t_updateTickChanged() {
         //WHEN
         Mockito.when(elevator.getClockTick()).thenAnswer(new Answer() {
             private long ticks = 10L;

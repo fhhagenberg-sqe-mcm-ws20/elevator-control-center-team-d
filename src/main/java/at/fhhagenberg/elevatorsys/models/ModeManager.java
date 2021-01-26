@@ -2,7 +2,6 @@ package at.fhhagenberg.elevatorsys.models;
 
 import sqelevator.IElevatorSystem;
 
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,13 +12,8 @@ public class ModeManager {
     public ModeManager(IElevatorSystem elevatorSystem){
         modes.put(Mode.MANUAL, new ManualMode(elevatorSystem));
         modes.put(Mode.AUTOMATIC, new AutomaticMode(elevatorSystem));
-
-        try {
-            for (int i = 0; i < elevatorSystem.getElevatorNum(); i++) {
-                modeMap.put(i, Mode.MANUAL);
-            }
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        for (int i = 0; i < elevatorSystem.getElevatorNum(); i++) {
+            modeMap.put(i, Mode.MANUAL);
         }
     }
 
@@ -33,11 +27,7 @@ public class ModeManager {
 
     public void execute(BuildingModel buildingModel) {
         buildingModel.getElevators().forEach(elevatorModel -> {
-            try {
-                modes.get(modeMap.get(elevatorModel.getElevatorNumber())).execute(elevatorModel);
-            } catch (RemoteException e) {
-                System.out.println(e.getLocalizedMessage());
-            }
+            modes.get(modeMap.get(elevatorModel.getElevatorNumber())).execute(elevatorModel);
         });
     }
 }

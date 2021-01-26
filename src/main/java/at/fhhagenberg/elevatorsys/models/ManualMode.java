@@ -2,15 +2,13 @@ package at.fhhagenberg.elevatorsys.models;
 
 import sqelevator.IElevatorSystem;
 
-import java.rmi.RemoteException;
-
 public class ManualMode extends ModeBase {
     public ManualMode(IElevatorSystem elevatorSystem) {
         super(elevatorSystem);
     }
 
     @Override
-    public void execute(ElevatorModel elevator) throws RemoteException {
+    public void execute(ElevatorModel elevator) {
         CommittedDirection direction = CommittedDirection.UNCOMMITTED;
         if(elevator.getCurrentFloor() < elevator.getCurrentFloorTarget()){
             direction = CommittedDirection.UP;
