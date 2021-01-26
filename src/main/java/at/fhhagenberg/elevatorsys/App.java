@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sqelevator.IElevatorSystem;
 import sqelevator.factory.ApiFactory;
+import sqelevator.factory.RmiFactory;
 
 /**
  * JavaFX App
@@ -16,6 +17,10 @@ public class App extends Application  {
 
     private ControlCenter controlCenter;
     private IElevatorSystem elevatorApi;
+
+    public App() {
+        apiFactory = new RmiFactory();
+    }
 
     public App(ApiFactory apiFactory) {
         this.apiFactory = apiFactory;
