@@ -9,8 +9,8 @@ import java.util.EventObject;
 public class ModeChangeEvent extends Event {
     public static final EventType<ModeChangeEvent> MODE_CHANGE_EVENT = new EventType(ANY);
 
-    private int elevatorNumber;
-    private Mode mode;
+    private final int elevatorNumber;
+    private final Mode mode;
 
     public ModeChangeEvent(int elevatorNumber, Mode mode) {
         super(MODE_CHANGE_EVENT);

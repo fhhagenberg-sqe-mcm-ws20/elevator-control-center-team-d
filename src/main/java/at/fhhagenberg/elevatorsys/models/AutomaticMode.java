@@ -8,7 +8,5 @@ public class AutomaticMode extends ModeBase {
     }
 
     @Override
-    public void execute(ElevatorModel elevator) {
-        System.out.println("I bims 1 AutomaticMode");
-    }
+    public void execute(ElevatorModel elevator) {}
 }
