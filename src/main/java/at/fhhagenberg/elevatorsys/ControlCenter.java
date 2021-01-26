@@ -15,11 +15,11 @@ import java.util.List;
 
 public class ControlCenter implements EventHandler {
 
-    private BuildingModel buildingModel;
+    private final BuildingModel buildingModel;
     private IElevatorSystem elevatorApi;
     private ModeManager modeManager;
 
-    private List<PropertyChangeListener> listener = new ArrayList<>();
+    private final List<PropertyChangeListener> listener = new ArrayList<>();
 
 
     public ControlCenter(IElevatorSystem elevatorApi) {
