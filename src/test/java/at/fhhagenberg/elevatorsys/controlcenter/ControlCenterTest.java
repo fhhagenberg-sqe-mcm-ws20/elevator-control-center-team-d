@@ -1,6 +1,7 @@
 package at.fhhagenberg.elevatorsys.controlcenter;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
+import at.fhhagenberg.elevatorsys.events.ModeChangeEvent;
 import at.fhhagenberg.elevatorsys.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -157,5 +158,20 @@ class ControlCenterTest {
         ModeManager modeManager = controlCenter.getModeManager();
         assertEquals(Mode.MANUAL, modeManager.getModeForElevator(0));
         assertEquals(Mode.AUTOMATIC, modeManager.getModeForElevator(1));
+    }
+
+    @Test
+    void t_modeChangeEvent() {
+        //GIVEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
+
+        //WHEN
+        controlCenter.setControlMode(0, Mode.MANUAL);
+        ModeChangeEvent modeChangeEvent = new ModeChangeEvent(0, Mode.AUTOMATIC);
+        controlCenter.handle(modeChangeEvent);
+
+        //THEN
+        ModeManager modeManager = controlCenter.getModeManager();
+        assertEquals(Mode.AUTOMATIC, modeManager.getModeForElevator(0));
     }
 }
