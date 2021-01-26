@@ -30,7 +30,6 @@ public class App extends Application  {
     @Override
     public void start(Stage stage) {
         elevatorApi = apiFactory.createElevatorApi();
-        elevatorApi.connect();
         controlCenter = new ControlCenter(elevatorApi);
         ControlCenterUI controlCenterUI = new ControlCenterUI(controlCenter);
 

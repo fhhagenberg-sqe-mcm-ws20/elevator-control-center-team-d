@@ -5,6 +5,6 @@ import sqelevator.RmiElevatorAdapter;
 
 public interface ApiFactory {
     default IElevatorSystem createElevatorApi() {
-        return new RmiElevatorAdapter();
+        return new RmiElevatorAdapter( "rmi://localhost/ElevatorSim");
     }
 }

@@ -7,7 +7,12 @@ public class RmiElevatorAdapter implements IElevatorSystem {
 
     private IElevator elevatorApi;
     private boolean connected = false;
-    private String lookupName = "rmi://localhost/ElevatorSim";
+    private String lookupName;
+
+    public RmiElevatorAdapter(String lookupName) {
+        this.lookupName = lookupName;
+        connect();
+    }
 
     @Override
     public void connect() {
@@ -227,7 +232,7 @@ public class RmiElevatorAdapter implements IElevatorSystem {
             while (!connected) {
                 connect();
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     System.out.println(e.getLocalizedMessage());
                 }

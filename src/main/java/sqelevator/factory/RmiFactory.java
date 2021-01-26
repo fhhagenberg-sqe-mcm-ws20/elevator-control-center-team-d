@@ -7,7 +7,7 @@ public class RmiFactory implements ApiFactory {
 
     @Override
     public IElevatorSystem createElevatorApi() {
-        return new RmiElevatorAdapter();
+        return new RmiElevatorAdapter("rmi://localhost/ElevatorSim");
     }
 
 }
