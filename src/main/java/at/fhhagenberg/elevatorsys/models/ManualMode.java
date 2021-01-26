@@ -15,7 +15,7 @@ public class ManualMode extends ModeBase {
         if(elevator.getCurrentFloor() < elevator.getCurrentFloorTarget()){
             direction = CommittedDirection.UP;
         }
-        else if (elevator.getCurrentFloorTarget() > elevator.getCurrentFloorTarget()){
+        else if (elevator.getCurrentFloor() > elevator.getCurrentFloorTarget()){
             direction = CommittedDirection.DOWN;
         }
         elevatorSystem.setCommittedDirection(elevator.getElevatorNumber(), direction.getValue());
