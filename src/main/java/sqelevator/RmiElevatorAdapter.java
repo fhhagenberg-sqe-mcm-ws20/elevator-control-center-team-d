@@ -85,7 +85,7 @@ public class RmiElevatorAdapter implements IElevatorSystem {
 
     @Override
     public int getFloorNum() throws RemoteException {
-        return elevatorApi.getElevatorNum();
+        return elevatorApi.getFloorNum();
     }
 
     @Override

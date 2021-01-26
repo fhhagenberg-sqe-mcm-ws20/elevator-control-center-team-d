@@ -46,7 +46,7 @@ public class App extends Application  {
                     }
                 });
                 try {
-                    Thread.sleep(25);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     System.out.println(e.getLocalizedMessage());
                 }
