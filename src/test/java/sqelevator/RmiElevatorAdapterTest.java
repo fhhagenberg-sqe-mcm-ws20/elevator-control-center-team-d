@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class RmiElevatorAdapterTest {
@@ -26,6 +27,23 @@ class RmiElevatorAdapterTest {
     @BeforeAll
     void before() throws AlreadyBoundException, RemoteException {
         mockApi = mock(IElevator.class, Mockito.withSettings().serializable());
+        when(mockApi.getCommittedDirection(0)).thenReturn(1);
+        when(mockApi.getElevatorAccel(0)).thenReturn(100);
+        when(mockApi.getElevatorButton(0, 0)).thenReturn(Boolean.TRUE);
+        when(mockApi.getElevatorDoorStatus(0)).thenReturn(1);
+        when(mockApi.getElevatorFloor(0)).thenReturn(1);
+        when(mockApi.getElevatorNum()).thenReturn(10);
+        when(mockApi.getElevatorPosition(0)).thenReturn(50);
+        when(mockApi.getElevatorSpeed(0)).thenReturn(20);
+        when(mockApi.getElevatorWeight(0)).thenReturn(250);
+        when(mockApi.getElevatorCapacity(0)).thenReturn(10);
+        when(mockApi.getFloorButtonDown(0)).thenReturn(Boolean.FALSE);
+        when(mockApi.getFloorButtonUp(0)).thenReturn(Boolean.TRUE);
+        when(mockApi.getFloorHeight()).thenReturn(5);
+        when(mockApi.getFloorNum()).thenReturn(8);
+        when(mockApi.getTarget(0)).thenReturn(2);
+        when(mockApi.getClockTick()).thenReturn(12345L);
+
         registry = LocateRegistry.createRegistry(1100);
         registry.bind("RmiConnectionTest", mockApi);
 
@@ -48,6 +66,29 @@ class RmiElevatorAdapterTest {
         registry.bind("RmiConnectionTest", mockApi);
         await().atMost(1000, TimeUnit.MILLISECONDS).until(() -> elevatorApi.isConnected());
         assertTrue(elevatorApi.isConnected());
+    }
+
+    @Test
+    void t_rmiGetterConnection() {
+        await().atMost(300, TimeUnit.MILLISECONDS).until(() -> elevatorApi.isConnected());
+        assertTrue(elevatorApi.isConnected());
+
+        assertEquals(1,elevatorApi.getCommittedDirection(0));
+        assertEquals(100,elevatorApi.getElevatorAccel(0));
+        assertEquals(Boolean.TRUE, elevatorApi.getElevatorButton(0,0));
+        assertEquals(1,elevatorApi.getElevatorDoorStatus(0));
+        assertEquals(1,elevatorApi.getElevatorFloor(0));
+        assertEquals(10,elevatorApi.getElevatorNum());
+        assertEquals(50,elevatorApi.getElevatorPosition(0));
+        assertEquals(20,elevatorApi.getElevatorSpeed(0));
+        assertEquals(250,elevatorApi.getElevatorWeight(0));
+        assertEquals(10,elevatorApi.getElevatorCapacity(0));
+        assertEquals(Boolean.FALSE, elevatorApi.getFloorButtonDown(0));
+        assertEquals(Boolean.TRUE, elevatorApi.getFloorButtonUp(0));
+        assertEquals(5, elevatorApi.getFloorHeight());
+        assertEquals(8, elevatorApi.getFloorNum());
+        assertEquals(2, elevatorApi.getTarget(0));
+        assertEquals(12345L, elevatorApi.getClockTick());
     }
 
 }
