@@ -79,6 +79,7 @@ public class ControlCenter implements EventHandler {
 
         ElevatorModel.ElevatorModelBuilder builder = new ElevatorModel.ElevatorModelBuilder();
 
+        builder.setElevatorNumber(elevatorNumber);
         builder.setDirectionStatus(elevatorApi.getCommittedDirection(elevatorNumber));
         builder.setDoorStatus(elevatorApi.getElevatorDoorStatus(elevatorNumber));
         builder.setCurrentAcceleration(elevatorApi.getElevatorAccel(elevatorNumber));
