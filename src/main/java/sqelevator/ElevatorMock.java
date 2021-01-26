@@ -13,6 +13,10 @@ public class ElevatorMock implements IElevatorSystem {
 
     private BuildingModel buildingModel;
 
+    public ElevatorMock() {
+        connect();
+    }
+
     @Override
     public void connect() {
         buildingModel = createDummyModel();
