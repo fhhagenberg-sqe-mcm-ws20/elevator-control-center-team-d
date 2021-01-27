@@ -2,7 +2,6 @@ package at.fhhagenberg.elevatorsys.view;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,8 +10,7 @@ public class ControlCenterUI extends HBox implements PropertyChangeListener {
     private final FloorIndicatorBarPane floorIndicators;
     private final ElevatorsPane elevators;
     private final ConnectionStatusPane connectionStatusPane;
-
-    private ControlCenter controlCenter;
+    private final ControlCenter controlCenter;
 
     public ControlCenterUI(ControlCenter controlCenter) {
         this.controlCenter = controlCenter;

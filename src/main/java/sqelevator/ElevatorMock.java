@@ -205,7 +205,7 @@ public class ElevatorMock implements IElevatorSystem {
                 DoorStatus.CLOSED,
                 0,
                 100,
-                0,
+                9,
                 0,
                 0,
                 0,
