@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ModeChangeEventTest {
+class ModeChangeEventTest {
 
     @Test
-    public void t_testModeChanges() {
+    void t_testModeChanges() {
         ModeChangeEvent modeChangeEvent = new ModeChangeEvent(0, Mode.MANUAL);
         ModeChangeEvent modeChangeEvent1 = new ModeChangeEvent(1, Mode.AUTOMATIC);
 

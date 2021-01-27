@@ -32,7 +32,7 @@ class GUIApplicationTest {
     }
 
     @Test
-    public void testSetTargetFloor(FxRobot robot) {
+    void testSetTargetFloor(FxRobot robot) {
         elevatorAPI.setTarget(0, 3);
         elevatorAPI.setTarget(1, 4);
         elevatorAPI.setTarget(2, 5);
@@ -70,7 +70,7 @@ class GUIApplicationTest {
      * @param fxRobot
      */
     @Test
-    public void testElevatorFloorSelection(FxRobot fxRobot) {
+    void testElevatorFloorSelection(FxRobot fxRobot) {
         FloorPane elevator0floor8 = fxRobot.lookup("#elevator0").lookup("#floor8").queryAs(FloorPane.class);
         fxRobot.clickOn(elevator0floor8);
 

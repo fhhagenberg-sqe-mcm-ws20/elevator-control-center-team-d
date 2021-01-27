@@ -7,11 +7,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ElevatorModelTest {
+class ElevatorModelTest {
 
 
     @Test
-    public void t_changeAllElevatorModelProperties() {
+    void t_changeAllElevatorModelProperties() {
 
         List<Integer> servicedFloors = new ArrayList<>();
         servicedFloors.add(0);
@@ -44,8 +44,4 @@ public class ElevatorModelTest {
         assertEquals(Boolean.TRUE, elevator.servesFloor(0));
 
     }
-
-
-
-
 }

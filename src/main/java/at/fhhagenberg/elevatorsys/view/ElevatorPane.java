@@ -1,8 +1,6 @@
 package at.fhhagenberg.elevatorsys.view;
 
 import at.fhhagenberg.elevatorsys.events.ModeChangeEvent;
-import at.fhhagenberg.elevatorsys.models.CommittedDirection;
-import at.fhhagenberg.elevatorsys.models.DoorStatus;
 import at.fhhagenberg.elevatorsys.models.ElevatorModel;
 import at.fhhagenberg.elevatorsys.models.Mode;
 import javafx.event.EventHandler;
