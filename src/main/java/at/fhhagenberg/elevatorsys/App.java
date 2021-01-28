@@ -54,8 +54,7 @@ public class App extends Application  {
         Thread updateThread = new Thread(updateRunnable);
         updateThread.setDaemon(true);
         updateThread.start();
-
-        //Todo: make windowSize dynamic?
+        
         var scene = new Scene(controlCenterUI, 1000, 700);
         stage.setScene(scene);
         stage.setTitle("Elevator Control Center");

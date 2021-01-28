@@ -10,7 +10,7 @@ public enum CommittedDirection {
     UNCOMMITTED(2);
 
     private final int value;
-    private static final Map map = new HashMap<>();
+    private static final Map<Integer, CommittedDirection> map = new HashMap<>();
 
     CommittedDirection(int value) {
         this.value = value;

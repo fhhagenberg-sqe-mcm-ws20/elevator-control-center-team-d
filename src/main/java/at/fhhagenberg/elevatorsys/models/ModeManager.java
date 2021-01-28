@@ -27,8 +27,8 @@ public class ModeManager {
     }
 
     public void execute(BuildingModel buildingModel) {
-        buildingModel.getElevators().forEach(elevatorModel -> {
-            modes.get(modeMap.get(elevatorModel.getElevatorNumber())).execute(elevatorModel);
-        });
+        buildingModel.getElevators().forEach(elevatorModel ->
+            modes.get(modeMap.get(elevatorModel.getElevatorNumber())).execute(elevatorModel)
+        );
     }
 }
