@@ -30,22 +30,18 @@ public class ElevatorFloorPane extends VBox {
     }
 
     public void setFloor(int level) {
-        assert level <= numberOfFloors;
         floors[numberOfFloors-level].setCurrentElevatorFloor(elevator);
     }
 
     public void unsetFloor(int level) {
-        assert level <= numberOfFloors;
         floors[numberOfFloors-level].unsetFloor();
     }
 
     public void setFloorLight(int level, Color color) {
-        assert level <= numberOfFloors;
         floors[numberOfFloors-level].setLight(color);
     }
 
     public void unsetFloorLight(int level) {
-        assert level <= numberOfFloors;
         floors[numberOfFloors-level].unsetLight();
     }
 
