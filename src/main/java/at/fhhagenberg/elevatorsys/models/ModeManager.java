@@ -2,11 +2,12 @@ package at.fhhagenberg.elevatorsys.models;
 
 import sqelevator.IElevatorSystem;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModeManager {
-    private Map<Mode, ModeBase> modes = new HashMap<>();
+    private Map<Mode, ModeBase> modes = new EnumMap<>(Mode.class);
     Map<Integer, Mode> modeMap = new HashMap<>();
 
     public ModeManager(IElevatorSystem elevatorSystem){

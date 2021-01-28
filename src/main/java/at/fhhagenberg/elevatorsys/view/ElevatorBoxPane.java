@@ -17,10 +17,6 @@ public class ElevatorBoxPane extends BorderPane {
         this.setPrefHeight(48);
         this.setPrefWidth(48);
         this.setStyle("-fx-background-color: #D3D3D3;");
-        //this.setMaxSize(35,35);
-        //this.setMinSize(35,35);
-        //this.setHeight(35);
-        //this.setWidth(35);
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
 
         doorLeft = new Rectangle();

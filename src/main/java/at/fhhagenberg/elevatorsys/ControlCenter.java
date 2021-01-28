@@ -39,7 +39,6 @@ public class ControlCenter implements EventHandler {
 
    //In Addition check if the clock tick is the same as from the earlier polling so we can skip the data if its the same since data didnt change.
     public boolean updateBuilding(){
-        System.out.println("update building called");
         long tickStart = this.elevatorApi.getClockTick();
         BuildingModel buildingModelNew = queryBuilding();
 

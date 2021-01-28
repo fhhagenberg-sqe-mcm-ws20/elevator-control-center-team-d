@@ -5,7 +5,7 @@ import sqelevator.IElevatorSystem;
 public abstract class ModeBase {
     IElevatorSystem elevatorSystem;
 
-    public ModeBase(IElevatorSystem elevatorSystem) {
+    protected ModeBase(IElevatorSystem elevatorSystem) {
         this.elevatorSystem = elevatorSystem;
     }
 

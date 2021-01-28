@@ -4,8 +4,6 @@ import at.fhhagenberg.elevatorsys.models.Mode;
 import javafx.event.Event;
 import javafx.event.EventType;
 
-import java.util.EventObject;
-
 public class ModeChangeEvent extends Event {
     public static final EventType<ModeChangeEvent> MODE_CHANGE_EVENT = new EventType(ANY);
 

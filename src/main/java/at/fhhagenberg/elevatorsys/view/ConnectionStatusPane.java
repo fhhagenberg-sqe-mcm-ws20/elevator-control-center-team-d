@@ -22,7 +22,6 @@ public class ConnectionStatusPane extends VBox {
         setConnectionStatus(connectionStatus);
         getChildren().addAll(connectionIndicator, infoMessage);
         setPadding(new Insets(5,5,5,5));
-        //setAlignment(Pos.CENTER_LEFT);
         setWidth(40);
         setHeight(40);
     }
