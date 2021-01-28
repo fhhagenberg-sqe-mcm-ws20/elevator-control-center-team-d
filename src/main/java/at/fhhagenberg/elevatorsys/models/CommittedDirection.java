@@ -23,7 +23,7 @@ public enum CommittedDirection {
     }
 
     public static CommittedDirection valueOf(int committedDirection) {
-        return (CommittedDirection) map.get(committedDirection);
+        return map.get(committedDirection);
     }
 
     public int getValue() {

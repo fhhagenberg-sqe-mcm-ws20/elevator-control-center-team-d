@@ -2,7 +2,6 @@ package at.fhhagenberg.elevatorsys.events;
 
 import at.fhhagenberg.elevatorsys.models.Mode;
 import javafx.event.Event;
-import javafx.event.EventType;
 
 public class ModeChangeEvent extends Event {
     private final int elevatorNumber;

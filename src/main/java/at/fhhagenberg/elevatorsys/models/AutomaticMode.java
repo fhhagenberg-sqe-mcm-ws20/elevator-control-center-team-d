@@ -8,5 +8,7 @@ public class AutomaticMode extends ModeBase {
     }
 
     @Override
-    public void execute(ElevatorModel elevator) {}
+    public void execute(ElevatorModel elevator) {
+        //not yet implemented
+    }
 }
