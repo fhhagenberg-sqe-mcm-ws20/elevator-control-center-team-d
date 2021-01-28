@@ -5,13 +5,11 @@ import javafx.event.Event;
 import javafx.event.EventType;
 
 public class ModeChangeEvent extends Event {
-    public static final EventType<ModeChangeEvent> MODE_CHANGE_EVENT = new EventType(ANY);
-
     private final int elevatorNumber;
     private final Mode mode;
 
     public ModeChangeEvent(int elevatorNumber, Mode mode) {
-        super(MODE_CHANGE_EVENT);
+        super(ANY);
         this.elevatorNumber = elevatorNumber;
         this.mode = mode;
     }
