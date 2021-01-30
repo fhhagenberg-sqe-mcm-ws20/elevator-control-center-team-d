@@ -1,10 +1,9 @@
 package sqelevator;
 
+import at.fhhagenberg.elevatorsys.App;
 import at.fhhagenberg.elevatorsys.ControlCenter;
-import at.fhhagenberg.elevatorsys.view.ControlCenterUI;
 import at.fhhagenberg.elevatorsys.view.FloorPane;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -13,8 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-
-import java.rmi.RemoteException;
+import sqelevator.factory.MockFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,37 +20,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(ApplicationExtension.class)
 class GUIApplicationTest {
 
-    private IElevator elevatorAPI;
+    private IElevatorSystem elevatorAPI;
     private ControlCenter controlCenter;
 
     @Start
     public void start(Stage stage) {
-        elevatorAPI = new ElevatorMock();
-        controlCenter = new ControlCenter(elevatorAPI);
-        ControlCenterUI controlCenterUI = new ControlCenterUI(controlCenter);
-        var scene = new Scene(controlCenterUI, 500, 700);
-        stage.setScene(scene);
-        stage.setTitle("Elevator Control Center");
-        stage.show();
+        App app = new App(new MockFactory());
+        app.start(stage);
+        elevatorAPI = app.getElevatorApi();
+        controlCenter = app.getControlCenter();
     }
 
-    /**
-     * Sets target floor in backend and checks on UI
-     * @param robot
-     * @throws RemoteException
-     */
     @Test
-    public void testSetTargetFloor(FxRobot robot) throws RemoteException {
+    void testSetTargetFloor(FxRobot robot) {
         elevatorAPI.setTarget(0, 3);
         elevatorAPI.setTarget(1, 4);
         elevatorAPI.setTarget(2, 5);
 
         Platform.runLater(() -> {
-            try {
-                controlCenter.updateBuilding();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            controlCenter.updateBuilding();
         });
         robot.sleep(1000);
 
@@ -84,7 +70,7 @@ class GUIApplicationTest {
      * @param fxRobot
      */
     @Test
-    public void testElevatorFloorSelection(FxRobot fxRobot) {
+    void testElevatorFloorSelection(FxRobot fxRobot) {
         FloorPane elevator0floor8 = fxRobot.lookup("#elevator0").lookup("#floor8").queryAs(FloorPane.class);
         fxRobot.clickOn(elevator0floor8);
 
@@ -95,11 +81,7 @@ class GUIApplicationTest {
         fxRobot.clickOn(elevator2floor3);
 
         Platform.runLater(() -> {
-            try {
-                controlCenter.updateBuilding();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            controlCenter.updateBuilding();
         });
 
         fxRobot.sleep(500);

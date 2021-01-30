@@ -12,7 +12,7 @@ public enum DoorStatus {
     CLOSING(4);
 
     private final int value;
-    private static final Map map = new HashMap<>();
+    private static final Map<Integer, DoorStatus> map = new HashMap<>();
 
     DoorStatus(int value) {
         this.value = value;
@@ -25,7 +25,7 @@ public enum DoorStatus {
     }
 
     public static DoorStatus valueOf(int doorStatus) {
-        return (DoorStatus) map.get(doorStatus);
+        return map.get(doorStatus);
     }
 
     public int getValue() {

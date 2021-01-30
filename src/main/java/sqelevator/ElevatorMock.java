@@ -2,119 +2,130 @@ package sqelevator;
 
 import at.fhhagenberg.elevatorsys.models.*;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElevatorMock implements IElevator {
+public class ElevatorMock implements IElevatorSystem {
 
     private int currentTick = 0;
     private boolean changeTicker = false;
+    private boolean connected = true;
 
-    private final BuildingModel buildingModel;
+    private BuildingModel buildingModel;
 
     public ElevatorMock() {
-        buildingModel = createDummyModel();
+        connect();
     }
 
     @Override
-    public int getCommittedDirection(int elevatorNumber) throws RemoteException {
+    public void connect() {
+        buildingModel = createDummyModel();
+        connected = true;
+    }
+
+    @Override
+    public boolean isConnected() {
+        return connected;
+    }
+
+    @Override
+    public int getCommittedDirection(int elevatorNumber){
         return buildingModel.getElevator(elevatorNumber).getDirectionStatus().getValue();
     }
 
     @Override
-    public int getElevatorAccel(int elevatorNumber) throws RemoteException {
+    public int getElevatorAccel(int elevatorNumber){
         return buildingModel.getElevator(elevatorNumber).getCurrentAcceleration();
     }
 
     @Override
-    public boolean getElevatorButton(int elevatorNumber, int floor) throws RemoteException {
+    public boolean getElevatorButton(int elevatorNumber, int floor) {
         return buildingModel.getElevator(elevatorNumber).getSelectedFloors().contains(floor);
     }
 
     @Override
-    public int getElevatorDoorStatus(int elevatorNumber) throws RemoteException {
+    public int getElevatorDoorStatus(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).getDoorStatus().getValue();
     }
 
     @Override
-    public int getElevatorFloor(int elevatorNumber) throws RemoteException {
+    public int getElevatorFloor(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).getCurrentFloor();
     }
 
     @Override
-    public int getElevatorNum() throws RemoteException {
+    public int getElevatorNum() {
         return buildingModel.getElevators().size();
     }
 
     @Override
-    public int getElevatorPosition(int elevatorNumber) throws RemoteException {
+    public int getElevatorPosition(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).getCurrentPosition();
     }
 
     @Override
-    public int getElevatorSpeed(int elevatorNumber) throws RemoteException {
+    public int getElevatorSpeed(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).getCurrentSpeed();
     }
 
     @Override
-    public int getElevatorWeight(int elevatorNumber) throws RemoteException {
+    public int getElevatorWeight(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).getCurrentWeight();
     }
 
     @Override
-    public int getElevatorCapacity(int elevatorNumber) throws RemoteException {
+    public int getElevatorCapacity(int elevatorNumber) {
         return buildingModel.getElevator(elevatorNumber).getCapacity();
     }
 
     @Override
-    public boolean getFloorButtonDown(int floor) throws RemoteException {
+    public boolean getFloorButtonDown(int floor)  {
         return buildingModel.getFloor(floor).isButtonDown();
     }
 
     @Override
-    public boolean getFloorButtonUp(int floor) throws RemoteException {
+    public boolean getFloorButtonUp(int floor) {
         return buildingModel.getFloor(floor).isButtonUp();
     }
 
     @Override
-    public int getFloorHeight() throws RemoteException {
+    public int getFloorHeight() {
         return buildingModel.getFloor(0).getFloorHeight();
     }
 
     @Override
-    public int getFloorNum() throws RemoteException {
+    public int getFloorNum() {
         return buildingModel.getFloors().size();
     }
 
     @Override
-    public boolean getServicesFloors(int elevatorNumber, int floor) throws RemoteException {
+    public boolean getServicesFloors(int elevatorNumber, int floor) {
         return buildingModel.getElevator(elevatorNumber).getServicedFloors().contains(floor);
     }
 
     @Override
-    public int getTarget(int elevatorNumber) throws RemoteException {
+    public int getTarget(int elevatorNumber)  {
         return buildingModel.getElevator(elevatorNumber).getCurrentFloorTarget();
     }
 
     @Override
-    public void setCommittedDirection(int elevatorNumber, int direction) throws RemoteException {
+    public void setCommittedDirection(int elevatorNumber, int direction)  {
         buildingModel.getElevator(elevatorNumber)
                 .setDirectionStatus(CommittedDirection.valueOf(direction));
     }
 
     @Override
-    public void setServicesFloors(int elevatorNumber, int floor, boolean service) throws RemoteException {
+    public void setServicesFloors(int elevatorNumber, int floor, boolean service)  {
         buildingModel.getElevator(elevatorNumber).shouldServeFloor(floor, service);
     }
 
     @Override
-    public void setTarget(int elevatorNumber, int target) throws RemoteException {
+    public void setTarget(int elevatorNumber, int target)  {
         buildingModel.getElevator(elevatorNumber).setCurrentFloorTarget(target);
     }
 
     @Override
-    public long getClockTick() throws RemoteException {
+    public long getClockTick()  {
         int tick = currentTick;
         if (changeTicker) {
             currentTick++;
@@ -194,7 +205,7 @@ public class ElevatorMock implements IElevator {
                 DoorStatus.CLOSED,
                 0,
                 100,
-                0,
+                9,
                 0,
                 0,
                 0,

@@ -42,7 +42,4 @@ public class BuildingModel {
         this.floors = floors;
     }
 
-    public void setAutomaticControl(int elevatorNumber, boolean automatic) {
-        elevators.get(elevatorNumber).setAutomaticControl(automatic);
-    }
 }

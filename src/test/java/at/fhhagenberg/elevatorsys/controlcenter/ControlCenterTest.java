@@ -1,16 +1,16 @@
 package at.fhhagenberg.elevatorsys.controlcenter;
 
 import at.fhhagenberg.elevatorsys.ControlCenter;
-import at.fhhagenberg.elevatorsys.models.CommittedDirection;
-import at.fhhagenberg.elevatorsys.models.FloorModel;
-import sqelevator.IElevator;
+import at.fhhagenberg.elevatorsys.events.ModeChangeEvent;
+import at.fhhagenberg.elevatorsys.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import sqelevator.IElevatorSystem;
 
-import java.rmi.RemoteException;
+import java.awt.event.MouseEvent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,12 +19,12 @@ import static org.mockito.Mockito.mock;
 
 class ControlCenterTest {
 
-    IElevator elevator;
+    IElevatorSystem elevator;
 
     @BeforeEach
-    void beforeEach() throws RemoteException {
+    void beforeEach(){
         //GIVEN
-        elevator = mock(IElevator.class);
+        elevator = mock(IElevatorSystem.class);
         Mockito.when(elevator.getElevatorNum()).thenReturn(2);
         Mockito.when(elevator.getFloorNum()).thenReturn(10);
 
@@ -56,7 +56,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_elevatorDataModel() throws RemoteException {
+    void t_elevatorDataModel() {
         //WHEN
         Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
         Mockito.when(elevator.getElevatorAccel(1)).thenReturn(1);
@@ -91,7 +91,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_floorDataModel() throws RemoteException {
+    void t_floorDataModel() {
         //WHEN
         Mockito.when(elevator.getFloorHeight()).thenReturn(20);
         Mockito.when(elevator.getFloorButtonDown(1)).thenReturn(false);
@@ -117,7 +117,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_updateTickCorrect() throws RemoteException {
+    void t_updateTickCorrect() {
         //WHEN
         ControlCenter controlCenter = new ControlCenter(elevator);
         Mockito.when(elevator.getCommittedDirection(1)).thenReturn(1);
@@ -129,7 +129,7 @@ class ControlCenterTest {
     }
 
     @Test
-    void t_updateTickChanged() throws RemoteException {
+    void t_updateTickChanged() {
         //WHEN
         Mockito.when(elevator.getClockTick()).thenAnswer(new Answer() {
             private long ticks = 10L;
@@ -147,5 +147,33 @@ class ControlCenterTest {
         assertEquals(CommittedDirection.UNCOMMITTED, controlCenter.getBuildingModel().getElevator(1).getDirectionStatus());
     }
 
+    @Test
+    void t_mode() {
+        //GIVEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
 
+        //WHEN
+        controlCenter.setControlMode(0, Mode.MANUAL);
+        controlCenter.setControlMode(1, Mode.AUTOMATIC);
+
+        //THEN
+        ModeManager modeManager = controlCenter.getModeManager();
+        assertEquals(Mode.MANUAL, modeManager.getModeForElevator(0));
+        assertEquals(Mode.AUTOMATIC, modeManager.getModeForElevator(1));
+    }
+
+    @Test
+    void t_modeChangeEvent() {
+        //GIVEN
+        ControlCenter controlCenter = new ControlCenter(elevator);
+
+        //WHEN
+        controlCenter.setControlMode(0, Mode.MANUAL);
+        ModeChangeEvent modeChangeEvent = new ModeChangeEvent(0, Mode.AUTOMATIC);
+        controlCenter.handle(modeChangeEvent);
+
+        //THEN
+        ModeManager modeManager = controlCenter.getModeManager();
+        assertEquals(Mode.AUTOMATIC, modeManager.getModeForElevator(0));
+    }
 }

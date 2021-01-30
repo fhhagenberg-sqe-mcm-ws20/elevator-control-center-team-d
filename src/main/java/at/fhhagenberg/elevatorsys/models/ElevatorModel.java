@@ -15,11 +15,8 @@ public class ElevatorModel {
     private int currentSpeed;
     private int currentWeight;
     private int currentFloorTarget;
-    private boolean automaticControlActivated = false;
     private List<Integer> servicedFloors;
-    private List<Integer> selectedFloors;
-    private Mode mode;
-
+    private final List<Integer> selectedFloors;
 
     public ElevatorModel(int elevatorNumber, CommittedDirection directionStatus, DoorStatus doorStatus, int currentAcceleration, int capacity, int currentFloor,
                          int currentPosition, int currentSpeed, int currentWeight,
@@ -132,10 +129,6 @@ public class ElevatorModel {
         return selectedFloors;
     }
 
-    public void setSelectedFloors(List<Integer> selectedFloors) {
-        this.selectedFloors = selectedFloors;
-    }
-
     public void selectFloor(Integer floor) {
         if (!selectedFloors.contains(floor)) {
             selectedFloors.add(floor);
@@ -146,27 +139,11 @@ public class ElevatorModel {
         selectedFloors.remove(floor);
     }
 
-    public boolean isAutomaticControlActivated() {
-        return automaticControlActivated;
-    }
-
-    public void setAutomaticControl(boolean automaticControlActivated) {
-        this.automaticControlActivated = automaticControlActivated;
-    }
-
     public void shouldServeFloor(int floor, boolean serve) {
         servicedFloors.remove(floor);
         if (serve) {
             servicedFloors.add(floor);
         }
-    }
-
-    public Mode getMode() {
-        return mode;
-    }
-
-    public void setMode(Mode mode) {
-        this.mode = mode;
     }
 
     public int getElevatorNumber() {
@@ -186,7 +163,7 @@ public class ElevatorModel {
         private int currentSpeed;
         private int currentWeight;
         private int currentFloorTarget;
-        private List<Integer> servicedFloors = new ArrayList<>();
+        private final List<Integer> servicedFloors = new ArrayList<>();
 
         public void setElevatorNumber(int elevatorNumber){
             this.elevatorNumber = elevatorNumber;
@@ -230,10 +207,6 @@ public class ElevatorModel {
 
         public void addServicedFloor(int floor) {
             servicedFloors.add(floor);
-        }
-
-        public void setServicedFloors(List<Integer> servicedFloors) {
-            this.servicedFloors = servicedFloors;
         }
 
         public ElevatorModel build() {
