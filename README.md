@@ -45,4 +45,4 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 4. Run the .jar file
 
 ###### Use the released .jar file
-1. Find the last release of the project[here](https://github.com/fhhagenberg-sqe-mcm-ws20/elevator-control-center-team-d/releases/tag/v1.0.0)
+1. Find the last release of the project [here](https://github.com/fhhagenberg-sqe-mcm-ws20/elevator-control-center-team-d/releases/tag/v1.0.0)
